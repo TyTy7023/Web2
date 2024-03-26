@@ -1,4 +1,5 @@
 <header class="header">
+    
     <div class="flex">
         <a href="home.php" class="logo"><img src="img/logo.jpg" alt=""></a>
         <nav class="navbar">
@@ -26,4 +27,5 @@
             </form>
         </div>
     </div>
+<script src ="./script.js"></script>
 </header>
