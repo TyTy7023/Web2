@@ -17,3 +17,51 @@ menu.addEventListener('click' , function(){
 userBtn.addEventListener('click',function(){  
     userBox.classList.toggle("active");   
 })
+/*--------------home page slider--------------------- */
+//"use strict"
+    const leftArrow = document.querySelector('.left-arrow .bxs-left-arrow'),
+     rightArrow = document.querySelector('.right-arrow .bxs-right-arrow'),
+     slider = document.querySelector('.slider');
+       // console.log(rightArrow);
+    /*--------------scroll to right--------------------- */
+function scrollRight(){
+    if(slider.scrollWidth - slider.clientWidth === slider.scrollLeft){
+        slider.scrollTo({
+            left:0,
+            behavior:"smooth"
+        });
+    }
+    else{
+        slider.scrollBy({
+            left: window.innerWidth,
+            behavior:"smooth"
+        })
+    }
+}
+/*--------------scroll to left--------------------- */
+function scrollLeft(){
+    slider.scrollBy({
+        left: -window.innerWidth,
+        behavior:"smooth"
+    })
+}
+let timerID = setInterval(scrollRight, 7000);
+/*--------------reset timer to scroll right--------------------- */
+function resetTimer(){
+    clearInterval(timerID);
+    timerID = setInterval(scrollRight, 7000);
+}
+/*--------------scroll event--------------------- */
+slider.addEventListener('click', function(ev){
+    if(ev.target === leftArrow){
+        scrollLeft();
+        resetTimer();
+    }
+})
+
+slider.addEventListener('click', function(ev){
+    if(ev.target === rightArrow){
+        scrollRight();
+        resetTimer();
+    }
+})

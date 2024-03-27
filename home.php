@@ -19,7 +19,7 @@
 <body>
         <?php include 'components/header.php'; ?>
        <div class="main">
-       <?php include 'components/footer.php'; ?>
+       
         <section class="home-section">
                 <div class="slider">
                     <div class="slider__slider slide1">
@@ -82,10 +82,11 @@
                 </div>
                 </section>
                 <!-- home slider end -->
+                <?php include 'components/footer.php'; ?>
        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         
         <?php include 'components/alert.php'; ?> 
-        <script scr="./script.js"></script>
+        <script scr="script.js"></script>
 </body>
 </html>
