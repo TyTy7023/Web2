@@ -80,39 +80,7 @@
         <section class= "products">
             <h1 class="title">product added in WishList</h1>
             <div class="box-container">
-                <?php
-                    $grand_total = 0;
-                    $select_wishlist = $conn->prepare("SELECT * FROM 'wishlist' WHERE user_id = ?");
-                    $select_wishlist->execute([$user_id]);
-                    if($select_wishlist->rowCount() > 0){
-                        while($fetch_wishlist = $select_wishlist->fetch(PDO::FETCH_ASSOC)){
-                            $select_product = $conn->prepare("SELECT * FROM 'products' WHERE id = ? ");
-                            $select_product->execute([$fetch_wishlist['product_id']]);
-                            if($select_product0>rowCount()>0)
-                                $fetch_product = $select_product->fetch(PDO::FETCH_ASSOC);
-                ?>
-                <form method="post" action="" class="box">
-                    <input type="hidden" name="wishlist_id" value="<?=$fetch_wishlist['id']; ?>">
-                    <img src="img/<?=$fetch_products['image'];?>">
-                    <div class="button">
-                        <button type="submit" name="add_to_cart"><i class='bx bx-cart-alt'></i></button>
-                        <a href="view_page.php?id=<?php echo $fetch_product['id'];?>"><i class='bx bxs-show'></i></a>
-                        <button type="submit" name="delete_item" onclick="return confirm('delete this item);"><i class='bx bx-x'></i></button>
-                    </div>
-                    <h3 class="name"><?php $fetch_products['name'];?></h3>
-                    <input type="hidden" name="product_id" value="<?php $fetch_products['id'];?>">
-                    <div class="flex">
-                        <p class="price">$<?php $fetch_products['price'];?>/-</p>
-                    </div>
-                    <a href="checkout.php?get_id=<?php $fetch_products['id'];?>" class="btn">Buy Now</a>
-                </form>
-                <?php
-                    $grand_total += $fetch_products['price'];
-                        }
-                    }else{
-                        echo "<h1 class='empty'>No product in wishlist</h1>";
-                    }
-                ?>
+               
         </section>
         <?php include 'components/footer.php';?> <!--add footer-->
     </div>
