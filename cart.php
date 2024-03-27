@@ -14,16 +14,28 @@
         $cart_id = filter_var($cart_id, FILTER_SANITIZE_STRING);
 
         $varify_cart = $conn->prepare("SELECT * FROM 'cart' WHERE id = ?");
-        $varify_cart->execute([$cart_id, $user_id]);
+        $varify_cart->execute([$cart_id]);
         
         if($varify_cart->rowCount() > 0){
             $delete_cart = $conn->prepare("DELETE FROM 'cart' WHERE id = ?");
-            $delete_cart->execute([$cart_id, $user_id]);
+            $delete_cart->execute([$cart_id]);
             $message = "Product removed from cart";
         }else{
             $message = "cart item already deleted";
         }
-
+    }
+    //empty cart
+    if(isset($_POST['delete_item'])){
+        $varify_empty_item = $conn->prepare("SELECT * FROM 'cart' WHERE user_id = ?");
+        $varify_empty_item->execute([$user_id]);
+        
+        if($varify_empty_item->rowCount() > 0){
+            $delete_cart = $conn->prepare("DELETE FROM 'cart' WHERE user_id = ?");
+            $delete_cart->execute([ $user_id]);
+            $message = "Empty successfully";
+        }else{
+            $message = "cart item already deleted";
+        }
     }
 
 ?>
@@ -84,9 +96,16 @@
             <?php
                 if($grand_total!=0){
             ?>
-            <?php
-                }
-            ?>
+            <div class="cart-total">
+                <p> total amount payable : <span>$ <?=$grand_total; ?>/-</span></p>
+                <div class = "button">
+                    <form method="post">
+                        <button type="submit" name="empty_cart" class="btn" onclick="return confirm('are you sure to empty your cart ?')">empty cart</button> 
+                    </form>
+                    <a href="checkout.php" class="btn">proceed to checkout</a>
+                </div>
+            </div>
+            <?php } ?>
         </section>
         <?php include 'components/footer.php';?> <!--add footer-->
     </div>
