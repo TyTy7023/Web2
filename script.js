@@ -7,8 +7,24 @@ function fixedNavbar(){
 fixedNavbar();
 window.addEventListener('scroll',fixedNavbar);
 
-let menu = document.getElementById('menu-btn');
-let userBtn = document.getElementById('user-btn');
+let menu = document.querySelector('#menu-btn');
+let userBtn = document.querySelector('#user-btn');
+/*-----------------testimonial slider------------------*/
+let slides = document.querySelectorAll('testimonial-item');
+index = 0;
+function nextSlide(){
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slide[index].classList.add('active');
+}
+function prevSlide(){
+    slides[index].classList.remove('active');
+    index = (index - 1 +  slides.length) % slides.length;
+    slide[index].classList.add('active'); 
+}
+
+menu = document.getElementById('menu-btn');
+userBtn = document.getElementById('user-btn');
 
 menu.addEventListener('click' , function(){
     navbar.classList.toggle("active");
