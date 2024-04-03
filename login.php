@@ -23,12 +23,11 @@
             }
             else{
             $message[] = 'incorrect username or password' ;
+            }
     }
-?> -->
+?>  -->
 <style type="text/css">
-        <?php  
-            include 'style.css';
-        ?>
+        <?php  include 'style.css'; ?>
 </style>
 <!DOCTYPE htmL>
 <html lang="en">
@@ -66,6 +65,6 @@
     </div>
         <script src="components/sweetalert.js"></script>
         <script scr="script.js"></script>
-        <?php include 'components/alert.php'; ?> 
+        <?php include 'components/alert.php'; ?>
 </body>  
 </html>
