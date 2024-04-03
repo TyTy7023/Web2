@@ -10,22 +10,22 @@
 //. Trong trường hợp này, có thể là các thiết lập của SweetAlert để hiển thị thông báo thành công.
     if(isset($success_msg)){
         foreach ($success_msg as $success_msg){
-            echo '<script> swal("'.$success_msg.' ","","success") </script>';
+            echo '<script> swal("'.$success_msg.' ","","success"); </script>';
         }
     }
     if(isset($warning_msg)){
         foreach ($warning_msg as $warning_msg){
-            echo '<script> swal("'.$warning_msg.' ","","sucess") </script>';
+            echo '<script> swal("'.$warning_msg.' ","","sucess"); </script>';
         }
     }
     if(isset($info_msg)){
         foreach ($info_msg as $info_msg){
-            echo '<script> swal("'.$info_msg.' ","","sucess") </script>';
+            echo '<script> swal("'.$info_msg.' ","","sucess"); </script>';
         }
     }
     if(isset($error_msg)){
         foreach ($error_msg as $error_msg){
-            echo '<script> swal("'.$error_msg.' ","","sucess") </script>';
+            echo '<script> swal("'.$error_msg.' ","","sucess"); </script>';
         }
     }
 ?>

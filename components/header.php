@@ -1,4 +1,5 @@
 <header class="header">
+    
     <div class="flex">
         <a href="home.php" class="logo"><img src="img/logo.jpg" alt=""></a>
         <nav class="navbar">
@@ -10,8 +11,18 @@
         </nav>
         
         <div class="icons">
-            <i class="bx bxs-user" id="user-btn" ></i>
+        <i class="bx bxs-user" id="user-btn" ></i>
+        <?php
+            // $count_wishlist_items = $conn->prepare("SELECT * FROM 'wishlist' WHERE user_id = ?");
+            // $count_wishlist_items->execute([$user_id]);
+            // $total_wishlist_items = $count_wishlist_items->rowCount();
+        ?>
             <a href="wishlist.php" class="cart-btn"><i class="bx bx-heart" ></i><sup>0</sup></a>
+        <?php
+            // $count_cart_items = $conn->prepare("SELECT * FROM 'cart' WHERE user_id = ?");
+            // $count_cart_items->execute([$user_id]);
+            // $total_cart_items = $count_cart_items->rowCount();  
+        ?>
             <a href="cart.php" class="cart-btn"><i class="bx bx-cart-download"></i><sup>0</sup></a>
             <i class="bx bx-list-plus" id="menu-btn" style="font-size: 2rem;"></i>
         </div>
@@ -26,4 +37,5 @@
             </form>
         </div>
     </div>
+<script src ="./script.js"></script>
 </header>
