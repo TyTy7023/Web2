@@ -1,6 +1,6 @@
 <?php
-session_start();
-include 'components/connection.php';
+// session_start();
+// include 'components/connection.php';
 /* include_once '../components/connection.php'; */
 
 if (isset($_SESSION['user_id'])) {
@@ -35,10 +35,10 @@ if (isset($_POST['logout'])) {
         <section class="products">
             <div class="box-container">
                 <?php
-                $select_products = $conn->prepare("SELECT * FROM `sanpham`");
-                $select_products->execute();
-                if ($select_products->rowCount() > 0) {
-                    while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
+                    $select_products = $conn->prepare("SELECT * FROM `sanpham`");
+                    $select_products->execute();
+                    if ($select_products->rowCount() > 0) {
+                        while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                         <form action="" method="post" class="box">
                             
@@ -57,10 +57,10 @@ if (isset($_POST['logout'])) {
                             <a href="checkout.php?get_id=<?= $fetch_products['id']; ?>" class="btn">Buy Now</a>
                         </form>
                 <?php
+                        }
+                    } else {
+                        echo '<p class="empty">No products added yet.</p>';
                     }
-                } else {
-                    echo '<p class="empty">No products added yet.</p>';
-                }
                 ?>
             </div>
         </section>

@@ -1,6 +1,4 @@
-<?php 
-    include 'components/connection.php';
-?>
+
     <style type="text/css">
         <?php  
             include 'style.css';
