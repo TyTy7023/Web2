@@ -71,7 +71,7 @@
                         <div class="slide-detail">
                             <h1>Lorem ipsum dolor sit</h1>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, cum? Corrupti placeat ex</p>
-                            <a href="view_products.php" class="btn">shop now</a>
+                            <a href="view_product.php" class="btn">shop now</a>
                         </div>
                         <div class="hero-dec-top"></div>
                         <div class="hero-dec-bottom"></div>
