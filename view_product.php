@@ -1,6 +1,6 @@
 <?php
-// session_start();
-// include 'components/connection.php';
+session_start();
+include 'components/connection.php';
 /* include_once '../components/connection.php'; */
 
 if (isset($_SESSION['user_id'])) {
