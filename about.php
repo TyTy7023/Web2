@@ -54,7 +54,7 @@
                     <div class="detail">
                         <span>coffee</span>
                         <h1>lemon green</h1>
-                        <a href="view_product.php" class="btn">shop now</a>
+                        <a href="view_products.php" class="btn">shop now</a>
                     </div>
                 </div>
             </div>
