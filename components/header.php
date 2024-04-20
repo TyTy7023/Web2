@@ -1,5 +1,14 @@
 <header class="header">
-    
+    <script>
+        const header = document.querySelector('header');
+        
+        function fixedNavbar() {
+            header.classList.toggle('scroll', window.pageYOffset > 0)
+        }
+        fixedNavbar();
+        window.addEventListener('scroll', fixedNavbar);
+
+    </script>
     <div class="flex">
         <a href="home.php" class="logo"><img src="img/logo.jpg" alt=""></a>
         <nav class="navbar">
