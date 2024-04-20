@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'components/connection.php';
-/* include_once '../components/connection.php'; */
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -40,9 +39,8 @@ if (isset($_POST['logout'])) {
                     if ($select_products->rowCount() > 0) {
                         while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                        <form action="" method="post" class="box">
-                            
-                            <img src="image/<?= $fetch_products['image']; ?>" class="img">
+                        <form action="" method="post" class="box">  
+                            <img src="img/<?= $fetch_products['image']; ?>" class="img">
                             <div class="button">
                                 <button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
                                 <button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>

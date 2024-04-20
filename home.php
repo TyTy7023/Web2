@@ -19,7 +19,6 @@
 <body>
         <?php include 'components/header.php'; ?>
        <div class="main">
-       
         <section class="home-section">
                 <div class="slider">
                     <div class="slider__slider slide1">
@@ -80,7 +79,7 @@
                     <div class="left-arrow"><i class="bx bxs-left-arrow"></i></div>
                     <div class="right-arrow"><i class="bx bxs-right-arrow"></i></div>
                 </div>
-                </section>
+        </section>
                 <!-- home slider end -->
                 <section class="thumb">
                      <div class="box-container">

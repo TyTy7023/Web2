@@ -15,7 +15,7 @@
 html{
     font-size: 16px;
     -ms-overflow-style:scrollbar;
-    -webkkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     font-family: sans-serif;
     --ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -181,13 +181,12 @@ header{
     box-shadow: var(--box-shadow);
     background-image: url('img/body-bg.jpg');
 }
-header.scrolled{
-    top:0;
+header.scroll{
+    top: 0;
     box-shadow: 0 5px 20px 0.1px rgb(0 ,0 ,0 ,0.1 );
-
 }
 
-.header.scrolled a:hover{
+.header.scroll a:hover{
     color: var(--green);
 }
 
@@ -331,10 +330,10 @@ header.scrolled{
 }
 .slide4{
     background-image: url('img/0.webp');
-            }
+}
 .slide5{
     background-image: url('img/4.jpg');
-    }
+}
 .left-arrow,
 .right-arrow{
     position: absolute;
@@ -534,8 +533,7 @@ footer{
     background-position: center;
     position: relative;
 }
-footer .overlay{
-
+footer .overlay{   
     position: absolute;
     top: 0;
     left: 0;
@@ -588,7 +586,7 @@ footer .inner-footer .card .social-links{
 footer .inner-footer .card .social-links i{
     width: 50px;
     height: 50px;
-    line-height: 30px;
+    line-height: 30px; 
     border-radius: 50%;
     background: #fff;
     box-shadow: var(--box-shadow);
@@ -598,10 +596,7 @@ footer .inner-footer .card .social-links i{
     padding: .6rem;
     font-size: 1.3rem;
 }
-footer .inner-footer .card .social-links i:hover{
-    background: var(--green);
-    color: #fff;
-}
+
 footer .bottom-footer{
     text-transform: capitalize;
     text-align: center;
@@ -635,7 +630,7 @@ footer .bottom-footer{
     .header .flex .navbar a{
         display: block;
         margin: 2rem;
-        border-bottom: 1px solid var(--green);
+        /* border-bottom: 1px solid var(--green); */
     }
     .form-container{
         width: 100%;
