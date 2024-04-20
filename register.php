@@ -1,4 +1,4 @@
-<!-- <?php 
+<?php 
     include 'components/connection.php';
     session_start();
     if(isset($_SESSION['user_id'])){
@@ -17,9 +17,11 @@
         $pass= filter_var($pass, FILTER_SANITIZE_STRING);
         $cpass = $_POST['cpass'];
         $cpass= filter_var($cpass, FILTER_SANITIZE_STRING);
+        
         $select_user = $conn->prepare("SELECT * FROM 'users' WHERE email = ?");
         $select_user -> execute([$email]);
         $row = $select_user->fetch(PDO::FETCH_ASSOC);
+
         if($select_user->rowCount() > 0){
             $message[] = 'email already exist';
         }
@@ -28,21 +30,22 @@
                 $message[]= 'confirm your password';
             }
             else{
-                $insert_user = $conn->prepare("INSERT INTO 'users'(id,name,email,password) VALUES(?,?,?,?)");
+                $insert_user = $conn->prepare("INSERT INTO `users`(id,name,email,password) VALUES(?,?,?,?)");
                 $insert_user->execute([$id,$name,$email,$pass]);
                 $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
                 $select_user->execute([$email, $pass]);
-                $row = $select_usen->fetch(PDO::FETCH_ASSOC) ;
+                $row = $select_user->fetch(PDO::FETCH_ASSOC) ;
+
                 if ($select_user->rowCount() > 0) {
-                    $_SESSTON[ 'user_id'] = $row['id'];
-                    $_SESSTON[ 'user_name'] = $rnow[ 'name ' ];
-                    $_SESSTON[ 'user_email'] = $row[ 'emai1 ' ];
-                    }
+                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['user_name'] = $row['name'];
+                    $_SESSION['user_email'] = $row['emai1 '];
+                }
             }
         }
 
     }
-?> -->
+?>
 <style type="text/css">
         <?php  
             include 'style.css';
@@ -68,33 +71,33 @@
             </div>
             <form action="" method="post">
                 <div class="input-field">
-                    <p>your name <sup>#</sup></p>
+                    <p>your name <span>*</span></p>
                     <input type="text" name="name" required placeholder="enter your name" maxlength="50"
-                    oninput="this.value = this.value.replace(/\s/g, '')">
-
+                    >
                 </div>
                 <div class="input-field">
-                    <p>your email <sup>*</sup></p>
+                    <p>your email <span>*</span></p>
                     <input type="email" name="email" required placeholder="enter your name" maxlength="50"
                     oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
-                    <p>your password <sup>*</sup></p>
+                    <p>your password <span>*</span></p>
                     <input type="password" name="cpass" nequired placeholder="enter your name" maxlength="50"
                     oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
-                    <p>confirm your password <sup>*</sup></p>
+                    <p>confirm your password <span>*</span></p>
                     <input type="password" name="cpass" nequired placeholder="enter your name" maxlength="50"
                     oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <input type="submit" name="submit" value="register now" class="btn">
-                <p>already have an account?</p> <a href="login.php">login now</a>
+                <p>already have an account? <a href="login.php">login now</a></p> 
             </form>
         </section>
     </div>
-        <script src="components/sweetalert.js"></script>
-        <script scr="script.js"></script>
+        <script>
+
+        </script>
         <?php include 'components/alert.php'; ?> 
 </body>  
 </html>          

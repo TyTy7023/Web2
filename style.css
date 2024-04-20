@@ -652,7 +652,8 @@ button{
     width: 50vw;
     margin: 0 auto;
 }
-.form-container input, textarea{
+.form-container input, 
+textarea{
     background-color: transparent;
     width: 85%;
 }
@@ -662,7 +663,7 @@ textarea{
 .form-container p{
     color: var(--green);
 }
-.form-container sup{
+.form-container span{
     color: red;
     font-size: 1.2rem;
 }
@@ -672,11 +673,16 @@ textarea{
 }
 .form-container form{
     margin: 1rem auto;
-    background-color: rgb(255,255,255/80%);
+    background-color: rgb(255 255 255/80%);
     box-shadow: var(--box-shadow);
     padding: 2rem;
     position: relative;
     border-radius: 5px;
+}
+.form-container form a{
+    cursor: pointer;
+    text-transform: uppercase;
+    color: blue;
 }
 .form-container form p{
     text-transform: uppercase;
@@ -688,6 +694,11 @@ textarea{
     width: 85%;
     border-radius: 10px;
     outline: none;
+}
+.address{
+    background-image: url('img/bg.jpg');
+    padding: 3rem 0;
+    text-align: center;
 }
 .address .box-container{
     justify-content: center;
