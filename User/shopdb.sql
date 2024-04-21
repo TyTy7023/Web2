@@ -2,22 +2,23 @@ DROP TABLE IF EXISTS product;
 CREATE TABLE `product` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
   `price` BIGINT NOT NULL,
   `image` varchar(255) NOT NULL,
   `product_detail` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `product` (`id`, `name`, `price`, `image`, `product_detail`) VALUES
-('1', 'Iphone 13', 20000000, '3.png', 'Iphone 13 128GB'),
-('2', 'Samsung Galaxy S21', 15000000, '0.jpg' , 'Samsung Galaxy S21 128GB'),
-('3', 'Xiaomi Redmi Note 10', 5000000, '1.jpg', 'Xiaomi Redmi Note 10 64GB'),
-('4', 'Oppo A94', 7000000, '2.jpg', 'Oppo A94 128GB'),
-('5', 'Vivo Y20', 4000000, '3.png', 'Vivo Y20 64GB'),
-('6', 'Realme 8', 6000000, '04.png', 'Realme 8 128GB'),
-('7', 'Nokia 5.4', 3000000, '6.jpg', 'Nokia 5.4 64GB'),
-('8', 'Huawei Y7a', 3500000, '7.jpg', 'Huawei Y7a 64GB'),
-('9', 'Sony Xperia 10 II', 8000000, '6.jpg', 'Sony Xperia 10 II 128GB'),
-('10', 'Asus Zenfone 8', 9000000, '6.jpg', 'Asus Zenfone 8 128GB');
+INSERT INTO `product` (`id`, `name`,`category`, `price`, `image`, `product_detail`) VALUES
+('1', 'Iphone 13', 'tea', 200, 'card2.jpg', 'Iphone 13 128GB'),
+('2', 'Samsung Galaxy S21', 'tea', 150, 'card2.jpg' , 'Samsung Galaxy S21 128GB'),
+('3', 'Xiaomi Redmi Note 10', 'tea', 500, 'card2.jpg', 'Xiaomi Redmi Note 10 64GB'),
+('4', 'Oppo A94', 'tea', 700, 'card2.jpg', 'Oppo A94 128GB'),
+('5', 'Vivo Y20', 'tea', 400, 'card2.jpg', 'Vivo Y20 64GB'),
+('6', 'Realme 8', 'coffee', 600, 'card2.jpg', 'Realme 8 128GB'),
+('7', 'Nokia 5.4', 'coffee', 300, 'card2.jpg', 'Nokia 5.4 64GB'),
+('8', 'Huawei Y7a', 'coffee', 300, 'card2.jpg', 'Huawei Y7a 64GB'),
+('9', 'Sony Xperia 10 II', 'coffee', 80, 'card2.jpg', 'Sony Xperia 10 II 128GB'),
+('10', 'Asus Zenfone 8', 'coffee', 900, 'card2.jpg', 'Asus Zenfone 8 128GB');
 
 DROP TABLE IF EXISTS wishlist;
 CREATE TABLE `wishlist` (
