@@ -1,4 +1,4 @@
-<!-- <?php 
+<?php 
     include 'components/connection.php';
     session_start();
     if(isset($_SESSION['user_id'])){
@@ -9,62 +9,65 @@
     }
     if(isset($_POST['submit'])){
         $email = $_POST['email'];
-        $email= filter_var($email, FILTER_SANITIZE_STRING);
+        $email = filter_var($email, FILTER_SANITIZE_STRING);
         $pass = $_POST['pass'];
-        $pass= filter_var($pass, FILTER_SANITIZE_STRING);
-        $select_user = $conn->prepare("SELECT * FROM 'users' WHERE email = ? AND pass = ?");
-        $select_user -> execute([$email,$pass]);
+        $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+        $select_user = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+        $select_user->execute([$email, $pass]);
         $row = $select_user->fetch(PDO::FETCH_ASSOC);
+
         if ($select_user->rowCount() > 0) {
-            $_SESSTON[ 'user_id'] = $rnow['id'];
-            $_SESSTON[ 'user_name'] = $now[ 'name' ];
-            $_SESSTON[ 'user_email'] = $row[ 'email' ];
-            header('1ocation: home.php' ) ;
-            }
-            else{
-            $message[] = 'incorrect username or password' ;
-            }
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_name'] = $row['name'];
+            $_SESSION['user_email'] = $row['email'];
+            header('Location: home.php');
+            exit; // Đảm bảo không có mã PHP nào được thực thi sau khi chuyển hướng
+        } else {
+            $message[] = 'incorrect username or password';
+        }
     }
-?>  -->
+?>
 <style type="text/css">
-        <?php  include 'style.css'; ?>
+<?php include 'style.css';
+?>
 </style>
 <!DOCTYPE htmL>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.9">
-    <title>green tea - register now</title>
+    <title>green tea - login now</title>
 </head>
+
 <body>
     <div class="main-container">
         <section class="form-container">
             <div class="title">
                 <img src="img/download.png">
-                <h1>register now</h1>
+                <h1>LOGIN now</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum deserunt minus
-                veniam
+                    veniam
                     tenetur
                 </p>
             </div>
             <form action="" method="post">
                 <div class="input-field">
-                    <p>your email <sup>*</sup></p>
+                    <p>your email <span>*</span></p>
                     <input type="email" name="email" required placeholder="enter your name" maxlength="50"
-                    oninput="this.value = this.value.replace(/\s/g, '')">
+                        oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
-                    <p>your password <sup>*</sup></p>
-                    <input type="password" name="cpass" required placeholder="enter your name" maxlength="50"
-                    oninput="this.value = this.value.replace(/\s/g, '')">
+                    <p>your password <span>*</span></p>
+                    <input type="password" name="pass" required placeholder="enter your name" maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
-                <input type="submit" name="submit" value="register now" class="btn">
-                <p>do not have an account?</p> <a href="register.php">resigter now</a>
+                <input type="submit" name="submit" value="login now" class="btn">
+                <p>do not have an account? <a href="register.php">register now</a></p>
             </form>
         </section>
     </div>
-        <script src="components/sweetalert.js"></script>
-        <script scr="script.js"></script>
-        <?php include 'components/alert.php'; ?>
-</body>  
+    <?php include 'components/alert.php'; ?>
+</body>
+
 </html>
