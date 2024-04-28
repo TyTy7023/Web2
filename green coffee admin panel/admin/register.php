@@ -67,22 +67,22 @@
                             <h3>register now</h3>
                             <div class="input-field">
                                     <label for="">user name <sup>*</sup></label>
-                                    <input type="text" name="name" maxlength="20" require placeholder ="Enter your username" oninput="this.value.replace(/\/g,'')">
+                                    <input type="text" name="name" maxlength="20" require placeholder ="Enter your username" oninput="this.value.replace(/\s/g,'')">
                             </div>
 
                             <div class="input-field">
                                     <label for="">user email <sup>*</sup></label>
-                                    <input type="email" name="email" maxlength="20" require placeholder ="Enter your email" oninput="this.value.replace(/\/g,'')">
+                                    <input type="email" name="email" maxlength="20" require placeholder ="Enter your email" oninput="this.value.replace(/\s/g,'')">
                             </div>
 
                             <div class="input-field">
                                     <label for="">user password <sup>*</sup></label>
-                                    <input type="password" name="password" maxlength="20" require placeholder ="Enter your password" oninput="this.value.replace(/\/g,'')">
+                                    <input type="password" name="password" maxlength="20" require placeholder ="Enter your password" oninput="this.value.replace(/\s/g,'')">
                             </div>
 
                             <div class="input-field">
                                     <label for="">confirm password <sup>*</sup></label>
-                                    <input type="password" name="cpassword" maxlength="20" require placeholder ="confirm password" oninput="this.value.replace(/\/g,'')">
+                                    <input type="password" name="cpassword" maxlength="20" require placeholder ="confirm password" oninput="this.value.replace(/\s/g,'')">
                             </div>
 
                             <div class="input-field">
