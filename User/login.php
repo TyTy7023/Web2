@@ -1,4 +1,4 @@
-<?php 
+<?php
     include 'components/connection.php';
     session_start();
     if(isset($_SESSION['user_id'])){
@@ -22,8 +22,9 @@
             $_SESSION['user_email'] = $row['email'];
             header('Location: home.php');
             exit; // Đảm bảo không có mã PHP nào được thực thi sau khi chuyển hướng
-        } else {
-            $message[] = 'incorrect username or password';
+        }else  {
+            $message = 'USER IS NOT REGISTERED OR PASSWORD IS INCORRECT.';
+                echo "<script>alert('$message');</script>";
         }
     }
 ?>

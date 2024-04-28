@@ -13,19 +13,28 @@
             echo '<script> swal("'.$success_msg.' ","","success"); </script>';
         }
     }
+    // if(isset($warning_msg)){
+    //     foreach ($warning_msg as $warning_msg){
+    //         echo '<script> swal("'.$warning_msg.' ","","sucess"); </script>';
+    //     }
+    // }
     if(isset($warning_msg)){
-        foreach ($warning_msg as $warning_msg){
-            echo '<script> swal("'.$warning_msg.' ","","sucess"); </script>';
+        foreach ($warning_msg as $msg){
+            // Đường dẫn đến hình ảnh
+            $image_url = 'path_to_your_image.jpg';
+            // Hiển thị thông báo SweetAlert với hình ảnh
+            echo '<script> swal({ title: "'.$msg.'", imageUrl: "'.$image_url.'", imageAlt: "Custom Image", icon: "warning" }); </script>';
         }
     }
+    
     if(isset($info_msg)){
         foreach ($info_msg as $info_msg){
             echo '<script> swal("'.$info_msg.' ","","sucess"); </script>';
         }
     }
     if(isset($error_msg)){
-        foreach ($error_msg as $error_msg){
-            echo '<script> swal("'.$error_msg.' ","","sucess"); </script>';
+        foreach ($error_msg as $error){
+            echo '<script> swal("'.$error.'", "", "error"); </script>';
         }
     }
 ?>
