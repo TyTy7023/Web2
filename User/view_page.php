@@ -108,12 +108,7 @@
                     <div class="price">$<?php echo $fetch_products['price']; ?>/-</div>
                     <div class="name"><?php echo $fetch_products['name']; ?></div>
                     <div class="product-detail">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum . </p>
+                        <p><?php echo $fetch_products['product_detail']; ?></p>
                     </div>
                     <input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
                     <div class="button">
