@@ -26,6 +26,18 @@
         }
 
     }
+    // update cart
+    if (isset($_POST['update_cart'])) {
+        $cart_id = $_POST['cart_id'];
+        $cart_id = filter_var($cart_id, FILTER_SANITIZE_STRING);
+        $qty = $_POST['qty'];
+        $qty = filter_var($qty, FILTER_SANITIZE_STRING);
+        
+        $update_qty = $conn->prepare("UPDATE cart SET qty = ? WHERE id = ?");
+        $update_qty->execute([$qty, $cart_id]);
+        
+        $success_msg[] = 'cart quantity updated successfully';
+    }
 
 ?>
 <!-- Used to embed css file into this file -->
@@ -57,10 +69,7 @@
                     $select_products = $conn->prepare("SELECT * FROM cart WHERE user_id=? " );
                     $select_products->execute([$user_id]);
                     $total_products = $select_products->rowCount();
-                // phân trang sản phẩm trong cart
-                    $products_per_page = 6; // Số sản phẩm trên mỗi trang
-                    $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại
-                    $offset = ($current_page - 1) * $products_per_page; // Tính offset
+                    $grand_total=0;
         
                     // Hiển thị danh sách sản phẩm
                     if ($select_products->rowCount() > 0) {
