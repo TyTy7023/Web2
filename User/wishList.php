@@ -87,14 +87,14 @@
             // phân trang sản phẩm trong wishlist
                 $products_per_page = 6; // Số sản phẩm trên mỗi trang
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại
-                $offset = ($current_page - 1) * $products_per_page; // Tính offset
+                $start = ($current_page - 1) * $products_per_page; // Tính offset
      
                 // Hiển thị danh sách sản phẩm
                 if ($select_products->rowCount() > 0) {
                     while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
                         // Xử lý hiển thị sản phẩm trong wishlist
                         $grand_total = 0;
-                        $select_wishlist = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?");
+                        $select_wishlist = $conn->prepare("SELECT * FROM wishlist WHERE user_id = ?LIMIT $start, $products_per_page");
                         $select_wishlist->execute([$user_id]);
                         
                         if ($select_wishlist->rowCount()>0) {
@@ -141,11 +141,11 @@
                     // $total_products = $total_products_row['total_products'];
                     $total_pages = ceil($total_products / $products_per_page);
                     // // Hiển thị liên kết phân trang
-                    // echo '<div class="pagination">';
-                    // for ($i = 1; $i <= $total_pages; $i++)  {
-                    //     echo "<a href='?page=$i'>$i</a> ";
-                    // }
-                    // echo '</div>';
+                    echo '<div class="pagination">';
+                    for ($i = 1; $i <= $total_pages; $i++)  {
+                        echo "<a href='?page=$i'>$i</a> ";
+                    }
+                    echo '</div>';
 
                     
                 ?>

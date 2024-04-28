@@ -116,24 +116,6 @@
             </div>
             <?php } ?>
             </section>
-            <div class="pagination">
-                <?php  
-                    
-                    // Tính tổng số trang dựa trên điều kiện tìm kiếm
-                    // $total_products_sql = "SELECT COUNT(*) AS total_products FROM cart WHERE 1=1";
-                    // $total_products_result = $conn->query($total_products_sql);
-                    // $total_products_row = $total_products_result->fetch(PDO::FETCH_ASSOC);
-                    // $total_products = $total_products_row['total_products'];
-                    $total_pages = ceil($total_products / $products_per_page);
-                    // // Hiển thị liên kết phân trang
-                    echo '<div class="pagination">';
-                    for ($i = 1; $i <= $total_pages; $i++)  {
-                        echo "<a href='?page=$i'>$i</a> ";
-                    }
-                    echo '</div>';
-                ?>
-            </div>
-
         <?php include 'components/footer.php';?> <!--add footer-->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

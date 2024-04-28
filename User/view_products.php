@@ -175,6 +175,11 @@
         <div class="pagination">
             <?php
                 // Tính tổng số trang dựa trên điều kiện tìm kiếm
+                if (isset($_GET['category'])) {
+                    $category_search = $_GET['category'];
+                } else {
+                    $category_search = '';
+                }
                 $total_products_sql = "SELECT COUNT(*) AS total_products FROM `product` WHERE 1=1";
 
                 if (!empty($category_search)) {
@@ -189,15 +194,14 @@
                 if (!empty($query)) {
                     $total_products_sql .= " AND (name LIKE '%$query%' OR description LIKE '%$query%')";
                 }
-
+                // echo $total_products_sql." ";
                 $total_products_result = $conn->query($total_products_sql);
                 $total_products_row = $total_products_result->fetch(PDO::FETCH_ASSOC);
                 $total_products = $total_products_row['total_products'];
                 $total_pages = ceil($total_products / $products_per_page);
 
-
                 // // Hiển thị liên kết phân trang
-            //     echo '<div class="pagination">';
+                echo '<div class="pagination">';
                 for ($i = 1; $i <= $total_pages; $i++)  {
                     echo "<a href='?page=$i&category=$category'>$i</a> ";
                 }
