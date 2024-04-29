@@ -82,11 +82,11 @@ sup{
 }
 
 .btn{
-    line-height: 2;
-    background-color: #e0ffcd;
+    line-height: 1;
+    background-color: var(--light-green);
     padding: 5px 35px;
     display: inline-block;
-    border-radius: 30px;
+    border-radius: 20px;
     color: #000;
     text-transform: capitalize;
     font-family: inherit;
@@ -96,24 +96,28 @@ sup{
     position: relative;
     overflow: hidden;
     vertical-align: middle;
-    transition: color 0.3s ease;
-    z-index:2;
+    transition: color .3s ease;
+    z-index: 2;
 }
 
 .btn::before{
-    position: absolute;
-    content:'';
+    position:absolute;
+    content: '';
     left: 0;
     top: 0;
     background: var(--green);
+    color: #fff;
     height: 100%;
     width: 0;
     z-index: -1;
-    transition: width 0.3s ease;
+    transition: width .3s ease;
 }
 
 .btn:hover::before{
     width: 100%;
+}
+.btn:hover{
+    color:#fff;
 }
 
 label{

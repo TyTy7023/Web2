@@ -45,11 +45,18 @@
 </head>
 <body>
 
-        <div class="main">
-                <section>
-                    <div class="form-container" id="admin_login">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <h3>login now</h3>
+<div class="main-container">
+        <section class="form-container">
+            <div class="title">
+                <img src="../img/download.png">
+                <h1>LOGIN now</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum deserunt minus
+                    veniam
+                    tenetur
+                </p>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                            
                             
                             <div class="input-field">
                                     <label for="">user email <sup>*</sup></label>
@@ -65,10 +72,9 @@
                             <button type="submit" name="login" class="btn">login now</button>
                             <p>do not have an account ? <a href="register.php">register now</a></p>
                         </form>
-                    </div>
-                </section>
-        </div>
-
+        </section>
+    </div>
+        
         <!-- sweetalert cdn link -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
