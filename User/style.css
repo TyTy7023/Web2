@@ -908,8 +908,9 @@ textarea{
 }
 .form-container form button{
     width: 85%;
-    border-radius: 10px;
+    border-radius: 20px;
     outline: none;
+    margin: 5 0rem;
 }
 .address{
     background-image: url('img/bg.jpg');

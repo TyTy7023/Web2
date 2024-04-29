@@ -93,7 +93,7 @@
                     <input type="password" name="cpass" nequired placeholder="enter your name" maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
-                <input type="submit" name="submit" value="register now" class="btn">
+                <button type="submit" name="submit" value="register now" class="btn">register</button>
                 <p>already have an account? <a href="login.php">login now</a></p>
             </form>
         </section>
