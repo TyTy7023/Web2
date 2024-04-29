@@ -63,7 +63,8 @@
                     <input type="password" name="pass" required placeholder="enter your name" maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
-                <input type="submit" name="submit" value="login now" class="btn">
+                
+                <button type="submit" name="submit" value="login now" class="btn">login now</button>
                 <p>do not have an account? <a href="register.php">register now</a></p>
             </form>
         </section>
