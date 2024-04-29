@@ -12,9 +12,10 @@
         header('Location: login.php');
         exit;
     }
-    $category = isset($_GET['category']) ? $_GET['category'] : '';
 
     // Khởi tạo câu truy vấn dựa trên loại sản phẩm được chọn
+    $category = isset($_GET['category']) ? $_GET['category'] : '';
+
     if (!empty($category)) {
         $select_products = $conn->prepare("SELECT * FROM `product` WHERE category = ?");
         $select_products->execute([$category]);
@@ -22,6 +23,61 @@
         // Nếu không có loại sản phẩm được chọn, truy vấn tất cả sản phẩm
         $select_products = $conn->prepare("SELECT * FROM `product`");
         $select_products->execute();
+    }
+
+    // Xử lý thêm sản phẩm vào yeu thich
+    if(isset($_POST['add_to_wishlist'])){
+        $id = unique_id();
+        $product_id = $_POST['product_id'];
+
+        $varify_wishlist = $conn->prepare("SELECT * FROM wishlist WHERE product_id = ? AND user_id = ?");
+        $varify_wishlist->execute([$product_id, $user_id]);
+
+        $cart_num = $conn->prepare("SELECT * FROM cart WHERE product_id = ? AND user_id = ?");
+        $cart_num->execute([$product_id, $user_id]);
+
+        if($varify_wishlist -> rowCount() > 0){
+            $warning_msg[] = "Product already exist to wishlist";
+        }else if ($cart_num -> rowCount() > 0){
+            $warning_msg[] = "Product already exist to cart";
+        }else {
+            $select_price = $conn->prepare("SELECT * FROM `product` WHERE id = ? LIMIT 1");
+            $select_price->execute([$product_id]);
+            $fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
+
+            $insert_wishlist = $conn->prepare("INSERT INTO `wishlist` (id, user_id, product_id, price) VALUES (?, ?, ?, ?)");
+            $insert_wishlist->execute([$id, $user_id, $product_id, $fetch_price['price']]);
+            $success_msg[] = "Product added to wishlist";
+        }
+    }
+
+     // Xử lý thêm sản phẩm vào giỏ hàng
+     if(isset($_POST['add_to_cart'])){
+        $id = unique_id();
+        $product_id = $_POST['product_id'];
+
+        $qty = $_POST['qty'];
+        $qty= filter_var($qty, FILTER_SANITIZE_STRING);
+
+        $varify_cart = $conn->prepare("SELECT * FROM cart WHERE product_id = ? AND user_id = ?");
+        $varify_cart->execute([$product_id, $user_id]);
+
+        $max_cart_items = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
+        $max_cart_items->execute([$user_id]);
+
+        if($varify_cart -> rowCount() > 0){
+            $warning_msg[] = "Product already exist to cart";
+        }else if ($max_cart_items-> rowCount() > 20){
+            $warning_msg[] = "cart is full";
+        }else {
+            $select_price = $conn->prepare("SELECT * FROM `product` WHERE id = ? LIMIT 1");
+            $select_price->execute([$product_id]);
+            $fetch_price = $select_price->fetch(PDO::FETCH_ASSOC);
+
+            $insert_cart = $conn->prepare("INSERT INTO `cart` (id, user_id, product_id, price, qty) VALUES (?, ?, ?, ?, ?)");
+            $insert_cart->execute([$id, $user_id, $product_id, $fetch_price['price'],$qty]);
+            $success_msg[] = "Product added to cart";
+        }
     }
 ?>
 
@@ -69,19 +125,25 @@
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại
                 $offset = ($current_page - 1) * $products_per_page; // Tính offset
 
+                $start = ($current_page-1)*$products_per_page ;
+                $end = $start+ $products_per_page;
+                //echo $start.'-'.$end;
+
                 if ($category === 'all') {
                     // Nếu người dùng chọn "all", truy vấn tất cả sản phẩm
-                    $select_products = $conn->prepare("SELECT * FROM `product` LIMIT $offset, $products_per_page");
+                    $select_products = $conn->prepare("SELECT * FROM `product` LIMIT $start,$products_per_page ");
                     $select_products->execute();
                 } else if (!empty($category)) {
                     // Nếu có một category được chọn, truy vấn sản phẩm trong category đó
-                    $select_products = $conn->prepare("SELECT * FROM `product` WHERE category = ? LIMIT $offset, $products_per_page");
+                    $select_products = $conn->prepare("SELECT * FROM `product` WHERE category = ? LIMIT $start,$products_per_page ");
                     $select_products->execute([$category]);
                 } else {
                     // Nếu không có category được chọn, truy vấn tất cả sản phẩm
-                    $select_products = $conn->prepare("SELECT * FROM `product` LIMIT $offset, $products_per_page");
+                    $select_products = $conn->prepare("SELECT * FROM `product` LIMIT $start,$products_per_page ");
                     $select_products->execute();
                 }
+
+                
 
                 // Hiển thị danh sách sản phẩm
                 if ($select_products->rowCount() > 0) {
@@ -112,28 +174,31 @@
         </section>
         <div class="pagination">
             <?php
-            
                 // Tính tổng số trang dựa trên điều kiện tìm kiếm
-    $total_products_sql = "SELECT COUNT(*) AS total_products FROM `product` WHERE 1=1";
+                if (isset($_GET['category'])) {
+                    $category_search = $_GET['category'];
+                } else {
+                    $category_search = '';
+                }
+                $total_products_sql = "SELECT COUNT(*) AS total_products FROM `product` WHERE 1=1";
 
-    if (!empty($category_search)) {
-        $total_products_sql .= " AND category = '$category_search'";
-    }
-    if (!empty($min_price)) {
-        $total_products_sql .= " AND price >= $min_price";
-    }
-    if (!empty($max_price)) {
-        $total_products_sql .= " AND price <= $max_price";
-    }
-    if (!empty($query)) {
-        $total_products_sql .= " AND (name LIKE '%$query%' OR description LIKE '%$query%')";
-    }
-
-    $total_products_result = $conn->query($total_products_sql);
-    $total_products_row = $total_products_result->fetch(PDO::FETCH_ASSOC);
-    $total_products = $total_products_row['total_products'];
-    $total_pages = ceil($total_products / $products_per_page);
-
+                if (!empty($category_search)) {
+                    $total_products_sql .= " AND category = '$category_search'";
+                }
+                if (!empty($min_price)) {
+                    $total_products_sql .= " AND price >= $min_price";
+                }
+                if (!empty($max_price)) {
+                    $total_products_sql .= " AND price <= $max_price";
+                }
+                if (!empty($query)) {
+                    $total_products_sql .= " AND (name LIKE '%$query%' OR description LIKE '%$query%')";
+                }
+                // echo $total_products_sql." ";
+                $total_products_result = $conn->query($total_products_sql);
+                $total_products_row = $total_products_result->fetch(PDO::FETCH_ASSOC);
+                $total_products = $total_products_row['total_products'];
+                $total_pages = ceil($total_products / $products_per_page);
 
                 // // Hiển thị liên kết phân trang
                 echo '<div class="pagination">';

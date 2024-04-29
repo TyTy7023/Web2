@@ -149,25 +149,25 @@
                     <img src="img/thumb2.jpg" alt="">
                     <h3>green tea</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <i class="bx bx-chevron-right"></i>
+                    <!-- <i class="bx bx-chevron-right"></i> -->
                 </div>
                 <div class="box">
                     <img src="img/thumb0.jpg" alt="">
                     <h3>lemon tea</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <i class="bx bx-chevron-right"></i>
+                    <!-- <i class="bx bx-chevron-right"></i> -->
                 </div>
                 <div class="box">
                     <img src="img/thumb1.jpg" alt="">
                     <h3>green coffee</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <i class="bx bx-chevron-right"></i>
+                    <!-- <i class="bx bx-chevron-right"></i> -->
                 </div>
                 <div class="box">
                     <img src="img/thumb.jpg" alt="">
                     <h3>green tea</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <i class="bx bx-chevron-right"></i>
+                    <!-- <i class="bx bx-chevron-right"></i> -->
                 </div>
             </div>
         </section>
@@ -179,7 +179,7 @@
                 <div class="box">
                     <img src="img/download.png" alt="">
                     <span>healthy tea</span>
-                    <h1>save up to 50% off</h1>
+                    <h1>Taste Explosion</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adialiquip cincididunt ut labore et dolore magna</p>
                 </div>
             </div>
@@ -232,7 +232,7 @@
                     <img src="img/6.jpg" alt="">
                     <div class="detail">
                         <span>BIG OFFERS</span>
-                        <h1>Extra 15% off</h1>
+                        <h1>Extra taste</h1>
                         <a href="view_products.php" class="btn">shop now</a>
                     </div>
                 </div>
