@@ -59,7 +59,7 @@
                                         echo '</div>'; // Đóng nhóm trước (nếu có)
                                     }// Tạo một nhóm mới
                                     echo '<div class="order-group">';
-                                    echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . '</h3>';
+                                    echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . ' -  Order id: <i>' .$fetch_order['id'] .'</i></h3>';
                                     $last_order_id = $order_id; // Cập nhật ID đặt hàng cuối cùng
                                 }
                                 if ($select_products->rowCount()>0) {
