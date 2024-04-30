@@ -610,8 +610,8 @@ button{
 }
 
 .products .box-container .box .img{
-    width: 80%;
-    height: auto;
+    width: auto;
+    height: 300px;
 }
     
 .products .box-container .box .name{
