@@ -159,7 +159,7 @@
                 ?>
 
                 <form action="" method="post" class="box">
-                    <img src="img/<?php echo $row['image']; ?>" class="img">
+                    <img src="image/<?php echo $row['image']; ?>" class="img">
                     <div class="button">
                         <button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
                         <button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>

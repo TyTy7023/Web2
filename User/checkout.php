@@ -107,7 +107,7 @@
                                         $grand_total += $sub_total;
                             ?>
                         <div class="flex">
-                            <img src="img/<?=$fetch_get['image']; ?>" class="img">
+                            <img src="image/<?=$fetch_get['image']; ?>" class="img">
                             <div class="detail">
                                 <h3 class="name"><?=$fetch_get['name']; ?></h3>
                                 <p>price: $<?=$fetch_get['price']; ?>/-</p>
@@ -127,7 +127,7 @@
                                             $grand_total += $sub_total;
                             ?>
                         <div class="flex">
-                            <img src="img/<?=$fetch_product['image']; ?>" class="img">
+                            <img src="image/<?=$fetch_product['image']; ?>" class="img">
                             <div class="detail">
                                 <h3 class="name"><?=$fetch_product['name']; ?></h3>
                                 <p class="price"><?=$fetch_product['price']; ?> X <?=$fetch_cart['qty']?></p>
