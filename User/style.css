@@ -1122,17 +1122,6 @@ textarea{
     position: absolute;
     right: 1%;
 }
-.orders .box-container .box .date{
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: .5rem 1.5rem;
-    background: var( --light-green);
-    font-size: .6rem;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    border-radius: .5rem;
-}
 .orders .box-container .box .image{
     height: 14rem;
     width: 224px;
@@ -1162,7 +1151,7 @@ textarea{
     border: 1px solid #ccc; /* Đường viền của nhóm đơn hàng */
     padding: 10px; /* Khoảng cách bên trong nhóm đơn hàng */
     border-radius: 5px; /* Độ cong của góc */
-    background-color: #f9f9f9; /* Màu nền của nhóm đơn hàng */
+    background-color: var(--light-green); /* Màu nền của nhóm đơn hàng */
 }
 
 .order-date {

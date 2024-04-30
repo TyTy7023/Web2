@@ -59,7 +59,7 @@
                                         echo '</div>'; // Đóng nhóm trước (nếu có)
                                     }// Tạo một nhóm mới
                                     echo '<div class="order-group">';
-                                    echo '<h2 class="order-id">Order date: ' . $fetch_order['date'] . '</h2>';
+                                    echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . '</h3>';
                                     $last_order_id = $order_id; // Cập nhật ID đặt hàng cuối cùng
                                 }
                                 if ($select_products->rowCount()>0) {
@@ -67,7 +67,7 @@
                     ?>
                 <div class="box" <?php if($fetch_order['status']=='cancle' ){echo 'style="border:2px solid red";' ;} ?>>
                     <a href="view_order.php?get_id=<?= $fetch_order['id']; ?>">
-                        <p class="date"><i class="bi bi-calender-fill"></i><span><?= $fetch_order['date']; ?></span></p>
+                        
                         <img src="image/<?= $fetch_product['image']; ?>" class="image">
                         <div class="row">
                             <h3 class="name"><?= $fetch_product['name']; ?></h3>
