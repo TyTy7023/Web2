@@ -70,7 +70,7 @@
                     <h1 class="heading">order place</h1>
                     <div class="box-container">
                         <?php
-                            $select_orders = $conn->prepare("SELECT * FROM 'orders'");
+                            $select_orders = $conn->prepare("SELECT * FROM orders");
                             $select_orders->execute();
 
                             if($select_orders->rowCount() > 0){

@@ -24,8 +24,8 @@
         $status =$_POST['status'];
         $status = filter_var($status, FILTER_SANITIZE_STRING);
         //update product
-        $update_product = $conn->prepare("UPDATE 'products' SET name=?, price=?, product_detail=?, status=?, WHERE id=?");
-        $update_product ->execute([$name, $price, $content, $status, $post_id]);
+        $update_product = $conn->prepare("UPDATE product SET name=?, price=?, product_detail=?, status=? WHERE id=?");
+        $update_product ->execute([$name, $price, $content, $status, $p_id]);
 
         $success_msg[] = 'product updated';
 
@@ -36,7 +36,7 @@
         $image_tmp_name = $_FILES['image']['tmp_name'];
         $image_folder = '../image/' .$image;
 
-        $select_image = $conn->prepare("SELECT * FROM 'products' WHERE image =?");
+        $select_image = $conn->prepare("SELECT * FROM product WHERE image =?");
         $select_image->execute([$image]);
 
         if(!empty($image)){
@@ -47,7 +47,7 @@
                 $warning_msg[] = 'please rename your image';
             }
                 else{
-                    $update_image = $conn->prepare("UPDATE 'products' SET image = ? WHERE id = ?");
+                    $update_image = $conn->prepare("UPDATE product SET image = ? WHERE id = ?");
                     $update_image ->execute([$image, $post_id]);
                     move_uploaded_file($image_tmp_name, $image_folder);
 
@@ -68,7 +68,7 @@
         $p_id = $_POST['product_id'];
         $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
 
-        $delete_image = $conn->prepare("SELECT * FROM 'products' WHERE id = ?");
+        $delete_image = $conn->prepare("SELECT * FROM product WHERE id = ?");
         $delete_image->execute(['$p_id']);
 
         $fetch_delete_image = $delete_image->fetch(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@
             unlink('../image/'.$fetch_delete_image['image']);
 
         }
-        $delete_product = $conn->prepare("DELETE FROM 'products' WHERE id=?");
+        $delete_product = $conn->prepare("DELETE FROM product WHERE id=?");
         $delete_product->execute([$p_id]);
 
         header('location:view_product.php');
@@ -107,7 +107,7 @@
                     <?php
                         $post_id = $_GET['id'];
 
-                        $select_product = $conn->prepare("SELECT * FROM 'products' WHERE id=?");
+                        $select_product = $conn->prepare("SELECT * FROM product WHERE id = ?");
                         $select_product->execute([$post_id]);
 
                         if($select_product->rowCount() > 0){

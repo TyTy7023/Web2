@@ -16,7 +16,7 @@
         $p_id = $_POST['product_id'];
         $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
 
-        $delete_product = $conn->prepare("DELETE FROM 'products' WHERE id = ?");
+        $delete_product = $conn->prepare("DELETE FROM product WHERE id = ?");
         $delete_product->execute(['$p_id']);
 
         $success_msg[] = 'product deleted successfully';
@@ -45,10 +45,10 @@
                     <h1 class="heading">all products</h1>
                     <div class="box-container">
                         <?php
-                            $select_products = $conn->prepare("SELECT * FROM 'products'");
+                            $select_products = $conn->prepare("SELECT * FROM product");
                             $select_products-> execute();
 
-                            if($select_product-> rowCount() > 0){
+                            if($select_products-> rowCount() > 0){
                                 while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC))
                                 {
 
@@ -60,7 +60,8 @@
                                 <?php if($fetch_products['image'] != ''){ ?>
                                     <img src="../image/<?= $fetch_products['image']; ?>" class="image">
                                 <?php } ?>
-                                <div class="status" style="color: <?php if($fetch_products['status']=='active'){echo "green";} else{echo "red";} ?>;"><?= $fetch_products['status']; ?></div>
+                                <div class="status" style="color: <?php if($fetch_products['status']=='active')
+                                {echo "green";} else{echo "red";} ?>;"><?= $fetch_products['status']; ?></div>
                                 <div class="price">$<?= $fetch_products['price']; ?> </div>
                                 <div class="title"><?= $fetch_products['name']; ?> </div>
                                 <div class="flex-btn">

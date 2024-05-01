@@ -144,7 +144,7 @@
                         <div class="input-field">
                             <label>product image <sup>*</sup></label>
                             <input type="file" name="image" accept="image/*" required>
-\                        </div>
+                        </div>
                         <div class="flex-btn">
                             <button type="submit" name="publish" class="btn">publish product</button>
                             <button type="submit" name="draft" class="btn">save as draft</button>

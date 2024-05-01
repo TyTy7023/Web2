@@ -32,7 +32,7 @@
                     <h1 class="heading">register user's</h1>
                     <div class="box-container">
                         <?php
-                            $select_users = $conn->prepare("SELECT * FROM 'users'");
+                            $select_users = $conn->prepare("SELECT * FROM users");
                             $select_users->execute();
 
                             if($select_users->rowCount() > 0){
@@ -45,7 +45,6 @@
                         ?>
                         <div class="box">
                             <div class="profile">
-                                <img src="../image/<?= $fetch_users['image']; ?>">
                             </div>
                             <p>user id : <span><?= $fetch_users['id']; ?></span></p>
                             <p>user name : <span><?= $fetch_users['name']; ?></span></p>
@@ -54,11 +53,12 @@
                         </div>
                         <?php
                                 }
-                            }echo '
+                            }else{echo '
                             <div class="empty">
                                 <p>no user register yet!</p>
                                 </div>
                             ';
+                            }
                         ?>
                     </div>
                 </section>

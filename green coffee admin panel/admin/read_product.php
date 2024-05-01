@@ -17,7 +17,7 @@
         $p_id = $_POST['product_id'];
         $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
 
-        $delete_image = $conn->prepare("SELECT * FROM 'products' WHERE id = ?");
+        $delete_image = $conn->prepare("SELECT * FROM product WHERE id = ?");
         $delete_image->execute(['$p_id']);
 
         $fetch_delete_image = $delete_image->fetch(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@
             unlink('../image/'.$fetch_delete_image['image']);
 
         }
-        $delete_product = $conn->prepare("DELETE FROM 'products' WHERE id=?");
+        $delete_product = $conn->prepare("DELETE FROM product WHERE id=?");
         $delete_product->execute([$p_id]);
 
         header('location:view_product.php');
@@ -54,7 +54,7 @@
                 <section class="read-post">
                     <h1 class="heading">read product</h1>
                     <?php
-                        $select_product = $conn->prepare("SELECT * FROM 'products' WHERE id=?");
+                        $select_product = $conn->prepare("SELECT * FROM product WHERE id=?");
                         $select_product->execute([$get_id]);
 
                         if($select_product->rowCount() > 0){

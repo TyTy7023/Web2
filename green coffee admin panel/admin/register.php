@@ -24,7 +24,7 @@
        
         // $email = 'htphuc884@gmail.com';
         // $email = 'khoa884@gmail.com';
-        $select_admin = $conn->prepare("SELECT * FROM admin WHERE email = ?");
+        $select_admin = $conn->prepare("SELECT * FROM 'admin' WHERE email = ?");
         $select_admin->execute([$email]);
 
         if($select_admin->rowCount() > 0){

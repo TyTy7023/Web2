@@ -45,13 +45,13 @@
                 <h1>unread message's</h1>
             </div>
             <div class="title2">
-                <a href="dashboard.php">dashboard</a><span> /unread message's</span>
+                <a href="dashboard.php">dashboard</a><span> / unread message's</span>
             </div>
                 <section class="accounts">
                     <h1 class="heading">unread message's</h1>
                     <div class="box-container">
                         <?php
-                            $select_message = $conn->prepare("SELECT * FROM 'message'");
+                            $select_message = $conn->prepare("SELECT * FROM message");
                             $select_message->execute();
 
                             if($select_message->rowCount() > 0){
