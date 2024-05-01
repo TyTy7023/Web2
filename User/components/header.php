@@ -50,7 +50,7 @@
             <a href="login.php" class="btn">login</a>
             <a href="register.php" class="btn">register</a>
             <form method="post">
-                <button type="submit" name="logout" class="logout-btn">log out</button>
+                <?php if(isset($_SESSION['user_name'])){?><button type="submit" name="logout" class="logout-btn">log out</button><?php } ?>
             </form>
         </div>
     </div>

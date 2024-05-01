@@ -5,7 +5,8 @@
         $user_id = $_SESSION['user_id'];
     }
     else{
-        $user_id='';
+        echo '<script> alert("Please login first");
+        location.href="login.php"</script>';
     }
     if(isset($_POST['logout'])){
         session_destroy();
@@ -145,6 +146,29 @@
                         <p>$<?= $grand_total?>/-</p>
                     </div>
                 </div>
+
+                <?php
+                    // Assuming $conn is your PDO connection and $user_id is the user's ID
+                    $address_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
+                    $address_user->execute([$user_id]);
+                    $fetch_address = $address_user->fetch(PDO::FETCH_ASSOC);
+
+                    $temp_address = $fetch_address['address'];
+                    $info_address = explode(",", $temp_address);
+
+                    $flat = $info_address[0];
+                    $street = $info_address[1];
+                    $city = $info_address[2];
+                    $country = $info_address[3];
+                    $pincode = $info_address[4];
+
+                    $address_type = $fetch_address['address_type'];
+
+                    $number = $fetch_address['number'];
+                    
+
+                   
+                ?>
                 <form method="post">
                     <h3>Billing Details</h3>
                     <div class="flex">
@@ -152,6 +176,7 @@
                             <div class="input-field">
                                 <p>Your name <span>*</span></p>
                                 <input type="text" name="name" required maxlength="50" placeholder="Enter Your Name"
+                                    <?php if(isset($_SESSION['user_name'])){echo 'value="'.$_SESSION['user_name'].'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
@@ -162,6 +187,7 @@
                             <div class="input-field">
                                 <p>Your email <span>*</span></p>
                                 <input type="email" name="email" required maxlength="50" placeholder="Enter Your Email"
+                                    <?php if(isset($_SESSION['user_email'])){echo 'value="'.$_SESSION['user_email'].'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
@@ -182,27 +208,27 @@
                         <div class="box">
                             <div class="input-field">
                                 <p>Address line 01<span>*</span></p>
-                                <input type="text" name="flat" required maxlength="50"
+                                <input type="text" name="flat" required maxlength="50" <?php if(isset($flat)){echo 'value="'.$flat.'"';}?>
                                     placeholder="e.g flat & building number" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Address line 02<span>*</span></p>
-                                <input type="text" name="street" required maxlength="50" placeholder="e.g street"
+                                <input type="text" name="street" required maxlength="50" placeholder="e.g street" <?php if(isset($street)){echo 'value="'.$street.'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
                                 <p>City name<span>*</span></p>
-                                <input type="text" name="city" required maxlength="50"
+                                <input type="text" name="city" required maxlength="50" <?php if(isset($city)){echo 'value="'.$city.'"';}?>
                                     placeholder="enter your city name" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Country name<span>*</span></p>
-                                <input type="text" name="country" required maxlength="50"
+                                <input type="text" name="country" required maxlength="50" <?php if(isset($country)){echo 'value="'.$country.'"';}?>
                                     placeholder="enter your city name" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Pincode<span>*</span></p>
-                                <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0"
+                                <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0" <?php if(isset($pincode)){echo 'value="'.$pincode.'"';}?>
                                     max="999999" class="input">
                             </div>
                         </div>

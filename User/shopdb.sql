@@ -61,8 +61,11 @@ CREATE TABLE `users` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `user_type` varchar(255) NOT NULL
+  `number` int(11) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `address_type` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS orders;
