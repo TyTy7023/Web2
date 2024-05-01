@@ -1025,6 +1025,14 @@ textarea{
     font-size: 1.1rem;
     margin: 1rem 0;
 }
+.main-container .button{
+    width: 85%;
+    color: grey;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--green);
+    padding: .5rem;
+    margin: 1rem 0;
+}
 .checkout .row form .flex{
     display: flex;
     column-gap: 1.5rem;

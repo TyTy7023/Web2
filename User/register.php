@@ -141,7 +141,7 @@
                 </div>
                 <div class="input-field">
                     <p>Address type<span>*</span></p>
-                    <select name="address_type" class="input">
+                    <select name="address_type" class="button">
                         <option value="home">home</option>
                         <option value="office">office</option>
                     </select>
