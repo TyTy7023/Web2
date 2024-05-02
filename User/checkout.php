@@ -27,7 +27,6 @@
         $address_type = $_POST['address_type'];
         $address_type =filter_var($address_type, FILTER_SANITIZE_STRING);
         $method = $_POST['method'];
-        echo $method;
         $method = filter_var($method, FILTER_SANITIZE_STRING);
         
         $varify_cart = $conn->prepare("SELECT * FROM cart WHERE user_id =? ");
@@ -181,7 +180,7 @@
                             </div>
                             <div class="input-field">
                                 <p>Your number <span>*</span></p>
-                                <input type="number" name="number" required maxlength="50"
+                                <input type="number" name="number" required maxlength="50" <?php if(isset($number)){echo 'value="'.$number.'"';}?>
                                     placeholder="Enter Your Number" class="input">
                             </div>
                             <div class="input-field">

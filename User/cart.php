@@ -91,8 +91,8 @@
                     <h3 class="name"><?=$fetch_products['name']; ?></h3>
                     <div class="flex">
                         <p class="price">price $<?=$fetch_products['price']; ?>/-</p>
-                        <input type="number" name="qty" required min="1" value="1" max="99" class="qty">
-                        <button type="submit" name="update_cart"><i class='bx bx-edit fa-edit'></i></button>
+                        <input type="number" name="qty" required min="1" value="<?=$fetch_cart['qty'] ?>" max="99" class="qty">
+                        <button type="number" name="update_cart" ><i class='bx bx-edit fa-edit'></i></button>
                     </div>
                     <p class="sub-total">sub total: <span>$<?=$sub_total = ($fetch_cart['qty'] * $fetch_cart['price']) ?></span></p>
                     <button type="submit" name="delete_item" class="btn" onclick="return confirm('delete this item')">delete</button>
@@ -117,7 +117,7 @@
                 <p>Total amout payable : <span>$<?= $grand_total ?>/-</span></p>
                 <div class="button">
                     <form method="post">
-                        <button type="submit" name="empty_cart" class="btn" onclick="return confirm('are you sure to empty your cart')">empty cart</button>
+                        <!-- <button type="submit" name="empty_cart" class="btn" onclick="return confirm('are you sure to empty your cart')">empty cart</button> -->
                         <a href="checkout.php" class="btn">proceed to checkout </a>
                     </form>
                     

@@ -8,6 +8,7 @@
         session_destroy();
         header('Location: login.php');
     }
+
     if (isset($_GET['get_id'])) {
         $get_id = $_GET['get_id'];
     }else{
@@ -15,7 +16,7 @@
         header('location:order.php');
     } 
 
-    if (isset($_POST['cancle'])) {
+    if (isset($_POST['cancled'])) {
         $update_order = $conn->prepare("UPDATE orders SET status = ? WHERE id =? ");
         $update_order->execute(['canceled', $get_id]);
         header('location:order.php');
@@ -57,57 +58,73 @@
             </div>
             <div class="box-container">
                 <?php
-                $grand_total=0;
-                $select_orders = $conn->prepare("SELECT * FROM orders WHERE id =?  LIMIT 1");
-                $select_orders->execute([$get_id]);
-                if ($select_orders->rowCount()>0) {
-                    while($fetch_order = $select_orders->fetch(PDO :: FETCH_ASSOC)){
-                        $select_product= $conn->prepare("SELECT * FROM product WHERE id = ? LIMIT 1");
-                        $select_product->execute([$fetch_order['product_id']]);
-                        if ($select_product->rowCount()>0) {
-                            while($fetch_product = $select_product->fetch(PDO :: FETCH_ASSOC)){
-                                $sub_total= ($fetch_order['price'] * $fetch_order['qty']);
-                                $grand_total += $sub_total;
-
-                ?>
+$grand_total = 0;
+$select_orders = $conn->prepare("SELECT * FROM orders WHERE id = ?");
+$select_orders->execute([$get_id]);
+if ($select_orders->rowCount() > 0) {
+    $index = 0;
+    while ($fetch_order = $select_orders->fetch(PDO::FETCH_ASSOC)) {
+        $select_product = $conn->prepare("SELECT * FROM product WHERE id = ?");
+        $select_product->execute([$fetch_order['product_id']]);
+        if ($select_product->rowCount() > 0) {
+            while ($fetch_product = $select_product->fetch(PDO::FETCH_ASSOC)) {
+                $sub_total = ($fetch_order['price'] * $fetch_order['qty']);
+                $grand_total += $sub_total;
+?>
                 <div class="box">
                     <div class="col">
-                        <p class="title"><i class="bi bi-calender-fill"></i> <?= $fetch_order['date'];?></p>
+                        <p class="title"><i class="bi bi-calender-fill"></i> <?= $fetch_order['date']; ?></p>
                         <img src="image/<?= $fetch_product['image']; ?>" class="image">
                         <p class="price"> <?= $fetch_product['price']; ?> x <?= $fetch_order['qty']; ?></p>
                         <h3 class="name"> <?= $fetch_product['name']; ?></h3>
                         <p class="grand-total">Total amount payable : <span>$ <?= $grand_total; ?></span></p>
-                    </div>
-                    <div class="col">
-                        <p class="title">billing address</p>
-                        <p class="user"><i class='bx bxs-user-check'></i><?= $fetch_order['name'];?></p>
-                        <p class="user"><i class='bx bxs-phone'></i> <?= $fetch_order['number']; ?></p>
-                        <p class="user"><i class='bx bxs-envelope'></i> <?= $fetch_order['email']; ?></p>
-                        <p class="user"><i class='bx bxs-map'></i> <?= $fetch_order['address']; ?></P>
+                        <?php if ($index == $select_orders->rowCount() - 1) { ?>
+                     </div>
+                </div>
+                <div class="box">
+                <div class="col">
 
-                        <p class="title">status</p>
-                        <p class="status"
-                            style="color :<?php if ($fetch_order['status' ] == 'delevered'){echo 'green' ;}elseif($fetch_order['status' ] == 'canceled') {echo 'red'; }elseif($fetch_order['status' ] == 'In process'){echo 'orange';}?>">
-                            <?= $fetch_order['status'] ?></p>
-                        <?php if ($fetch_order['status'] == 'canceled') { ?>
-                        <a href="checkout.php?get_id =<?= $fetch_product['id']; ?>" class="btn">order again</a>
-                        <?php }else{ ?>
-                        <form method="post">
-                            <button type="submit" name="cancel" class="btn" , onclick="return confirm('do you want to cancel this order')">cancle order</button>
-                        </form>
+                            <!-- Kiểm tra nếu là sản phẩm cuối cùng thì hiển thị thông tin -->
+                            <p class="title">billing address</p>
+                            <p class="user"><i class='bx bxs-user-check'></i><?= $fetch_order['name']; ?></p>
+                            <p class="user"><i class='bx bxs-phone'></i> <?= $fetch_order['number']; ?></p>
+                            <p class="user"><i class='bx bxs-envelope'></i> <?= $fetch_order['email']; ?></p>
+                            <p class="user"><i class='bx bxs-map'></i> <?= $fetch_order['address']; ?></P>
+
+                            <p class="title">status</p>
+                            <p class="status" style="color :<?php if ($fetch_order['status'] == 'delevered') {
+                                                                echo 'green';
+                                                            } elseif ($fetch_order['status'] == 'canceled') {
+                                                                echo 'red';
+                                                            } elseif ($fetch_order['status'] == 'In process') {
+                                                                echo 'orange';
+                                                            } ?>">
+                                <?= $fetch_order['status'] ?>
+                            </p>
+                            <?php if ($fetch_order['status'] == 'canceled') { ?>
+                                <a href="checkout.php?get_id=<?= $fetch_product['id']; ?>" class="btn">order again</a>
+                            <?php } else { ?>
+                                <form method="post">
+                                    <button type="submit" name="cancled" class="btn" , onclick="return confirm('do you want to cancel this order')">cancel order</button>
+                                </form>
+                            </div>
+                            </div>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
-                <?php 
-                            }
-                        }else{
-                            echo '<p></p><p class="empty">No orders have place yet</p>';
-                        }
-                    }
-                }else{
-                    echo '<p></p><p class="empty">No orders found</p>';
-                }
-            ?>
+<?php
+            }
+            $index++;
+        } else {
+            echo '<p></p><p class="empty">No orders have been placed yet</p>';
+        }
+    }
+} else {
+    echo '<p></p><p class="empty">No orders found</p>';
+}
+?>
+
             </div>
         </section>
         <?php include 'components/footer.php';?>
