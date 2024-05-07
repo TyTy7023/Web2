@@ -97,46 +97,46 @@
                 </div>
                 <div class="input-field">
                     <p>your email <span>*</span></p>
-                    <input type="email" name="email" required placeholder="enter your name" maxlength="50"
+                    <input type="email" name="email" required placeholder="enter your name.." maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
                     <p>Your number <span>*</span></p>
-                    <input type="number" name="number" required maxlength="50" placeholder="Enter Your Number"
+                    <input type="number" name="number" required maxlength="50" placeholder="Enter Your Number.."
                         class="input">
                 </div>
                 <div class="input-field">
                     <p>your password <span>*</span></p>
-                    <input type="password" name="pass" nequired placeholder="enter your name" maxlength="50"
+                    <input type="password" name="pass" nequired placeholder="enter your password.." maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
                     <p>confirm your password <span>*</span></p>
-                    <input type="password" name="cpass" nequired placeholder="enter your name" maxlength="50"
+                    <input type="password" name="cpass" nequired placeholder="enter your password again.." maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
                     <p>Address line 01<span>*</span></p>
-                    <input type="text" name="flat" required maxlength="50" placeholder="e.g flat & building number"
+                    <input type="text" name="flat" required maxlength="50" placeholder="e.g flat & building number.."
                         class="input">
                 </div>
                 <div class="input-field">
                     <p>Address line 02<span>*</span></p>
-                    <input type="text" name="street" required maxlength="50" placeholder="e.g street" class="input">
+                    <input type="text" name="street" required maxlength="50" placeholder="e.g street.." class="input">
                 </div>
                 <div class="input-field">
                     <p>City name<span>*</span></p>
-                    <input type="text" name="city" required maxlength="50" placeholder="enter your city name"
+                    <input type="text" name="city" required maxlength="50" placeholder="enter your city name.."
                         class="input">
                 </div>
                 <div class="input-field">
                     <p>Country name<span>*</span></p>
-                    <input type="text" name="country" required maxlength="50" placeholder="enter your city name"
+                    <input type="text" name="country" required maxlength="50" placeholder="enter your city name.."
                         class="input">
                 </div>
                 <div class="input-field">
                     <p>Pincode<span>*</span></p>
-                    <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0" max="999999"
+                    <input type="text" name="pincode" required maxlength="6" placeholder="your pun code.." min="0" max="999999"
                         class="input">
                 </div>
                 <div class="input-field">
