@@ -65,6 +65,14 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `user_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+DROP TABLE IF EXISTS admin;
+CREATE TABLE `admin` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `profile` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS orders;
 CREATE TABLE `orders` (

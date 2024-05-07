@@ -32,7 +32,7 @@
         $old_image = $_POST['old_image'];
         $image = $_FILES['image']['name'];
         $image = filter_var($image, FILTER_SANITIZE_STRING);
-        $image_size = $_FILES['image']['tmp_size'];
+        $image_size = $_FILES['image']['size'];
         $image_tmp_name = $_FILES['image']['tmp_name'];
         $image_folder = '../image/' .$image;
 
@@ -48,7 +48,7 @@
             }
                 else{
                     $update_image = $conn->prepare("UPDATE product SET image = ? WHERE id = ?");
-                    $update_image ->execute([$image, $post_id]);
+                    $update_image ->execute([$image, $p_id]);
                     move_uploaded_file($image_tmp_name, $image_folder);
 
                     if($old_image != $image AND $old_image != ''){

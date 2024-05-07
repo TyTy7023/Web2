@@ -30,7 +30,7 @@
         $image_tmp_name = $_FILES['image']['tmp_name'];
         $image_folder = '../image/' .$image;
 
-        $select_image = $conn->prepare("SELECT * FROM 'product' WHERE image = ?");
+        $select_image = $conn->prepare("SELECT * FROM product WHERE image = ?");
         $select_image-> execute([$image]);
 
         if(isset($image)){
@@ -51,7 +51,7 @@
             $warning_msg[] = 'please rename your image';
         }
         else{
-            $insert_product =$conn-> prepare("INSERT INTO 'product'(id, name, price, image, product_detail, status) VALUE (?, ?, ?, ?, ?, ?)");
+            $insert_product =$conn-> prepare("INSERT INTO product(id, name, price, image, product_detail, status) VALUE (?, ?, ?, ?, ?, ?)");
             $insert_product->execute([$id, $name, $price, $image, $content, $status]);
             $success_msg[] = 'product inserted successfully';
         }
@@ -78,7 +78,7 @@
         $image_tmp_name = $_FILES['image']['tmp_name'];
         $image_folder = '../image/' .$image;
 
-        $select_image = $conn->prepare("SELECT * FROM 'product' WHERE image = ?");
+        $select_image = $conn->prepare("SELECT * FROM product WHERE image = ?");
         $select_image-> execute([$image]);
 
         if(isset($image)){
@@ -99,7 +99,7 @@
             $warning_msg[] = 'please rename your image';
         }
         else{
-            $insert_product =$conn-> prepare("INSERT INTO 'products'(id, name, price, image, product_detail, status) VALUE (?, ?, ?, ?, ?, ?)");
+            $insert_product =$conn-> prepare("INSERT INTO product(id, name, price, image, product_detail, status) VALUE (?, ?, ?, ?, ?, ?)");
             $insert_product->execute([$id, $name, $price, $image, $content, $status]);
             $success_msg[] = 'product saved as draft successfully';
         }
