@@ -17,6 +17,19 @@
         $pass= filter_var($pass, FILTER_SANITIZE_STRING);
         $cpass = $_POST['cpass'];
         $cpass= filter_var($cpass, FILTER_SANITIZE_STRING);
+        $number = $_POST['number'];
+        $number= filter_var($number, FILTER_SANITIZE_STRING);
+        $address = $_POST['flat'].', '.$_POST['street'];
+        $address= filter_var($address, FILTER_SANITIZE_STRING);
+        $city = $_POST['city'];
+        $city= filter_var($city, FILTER_SANITIZE_STRING);
+        $country = $_POST['country'];
+        $country= filter_var($country, FILTER_SANITIZE_STRING);
+        $pincode = $_POST['pincode'];
+        $pincode= filter_var($pincode, FILTER_SANITIZE_STRING);
+        $address_type = $_POST['address_type'];
+        $address_type= filter_var($address_type, FILTER_SANITIZE_STRING);
+        $address = $_POST['flat'].', '.$_POST['street'].', '.$_POST['city'].', '.$_POST['country'].', '. $_POST['pincode'];
         
         $select_user = $conn->prepare("SELECT * FROM users WHERE email = ?");
         $select_user -> execute([$email]);
@@ -32,8 +45,8 @@
                 echo "<script>alert('$message');</script>";
             }
             else{
-                $insert_user = $conn->prepare("INSERT INTO `users` (id, name, email, password) VALUES (?, ?, ?, ?)");
-                $insert_user->execute([$id,$name,$email,$pass]);
+                $insert_user = $conn->prepare("INSERT INTO `users` (id, name, email, password, number, address, address_type ) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $insert_user->execute([$id,$name,$email,$pass,$number,$address,$address_type]);
                 $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
                 $select_user->execute([$email, $pass]);
                 $row = $select_user->fetch(PDO::FETCH_ASSOC) ;
@@ -42,6 +55,10 @@
                     $_SESSION['user_id'] = $row['id'];
                     $_SESSION['user_name'] = $row['name'];
                     $_SESSION['user_email'] = $row['email'];
+                    $_SESSION['user_number'] = $row['number'];
+                    $_SESSION['user_address'] = $row['address'];
+                    $_SESSION['user_address_type'] = $row['address_type'];
+
                 }
                 header('Location: home.php');
             }
@@ -84,6 +101,11 @@
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
                 <div class="input-field">
+                    <p>Your number <span>*</span></p>
+                    <input type="number" name="number" required maxlength="50" placeholder="Enter Your Number"
+                        class="input">
+                </div>
+                <div class="input-field">
                     <p>your password <span>*</span></p>
                     <input type="password" name="pass" nequired placeholder="enter your name" maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
@@ -93,7 +115,38 @@
                     <input type="password" name="cpass" nequired placeholder="enter your name" maxlength="50"
                         oninput="this.value = this.value.replace(/\s/g, '')">
                 </div>
-                <input type="submit" name="submit" value="register now" class="btn">
+                <div class="input-field">
+                    <p>Address line 01<span>*</span></p>
+                    <input type="text" name="flat" required maxlength="50" placeholder="e.g flat & building number"
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Address line 02<span>*</span></p>
+                    <input type="text" name="street" required maxlength="50" placeholder="e.g street" class="input">
+                </div>
+                <div class="input-field">
+                    <p>City name<span>*</span></p>
+                    <input type="text" name="city" required maxlength="50" placeholder="enter your city name"
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Country name<span>*</span></p>
+                    <input type="text" name="country" required maxlength="50" placeholder="enter your city name"
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Pincode<span>*</span></p>
+                    <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0" max="999999"
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Address type<span>*</span></p>
+                    <select name="address_type" class="button">
+                        <option value="home">home</option>
+                        <option value="office">office</option>
+                    </select>
+                </div>
+                <button type="submit" name="submit" value="register now" class="btn">register</button>
                 <p>already have an account? <a href="login.php">login now</a></p>
             </form>
         </section>
