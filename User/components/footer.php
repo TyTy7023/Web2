@@ -1,9 +1,9 @@
 <div class="top-footer">
     <h2><i class="bx bx-envelope"></i>Sign Up For Newslatter</h2>
-    <div class="input-field">
+    <!-- <div class="input-field">
         <input type="text" name="" placeholder="email address...">
         <button class = "btn">subscribe</button>
-    </div>    
+    </div>     -->
 </div>
 <footer>
     <div class="overlay"></div>

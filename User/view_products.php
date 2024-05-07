@@ -120,6 +120,7 @@
         </div>
         <section class="products">
             <div class="box-container">
+                
                 <?php
                 $products_per_page = 6; // Số sản phẩm trên mỗi trang
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại

@@ -47,8 +47,10 @@
         <div class="user-box">
             <p>user name : <span><?php if(isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></span></p>
             <p>Email : <span><?php if(isset($_SESSION['user_email'])) echo $_SESSION['user_email']; ?></span></p>
+            <?php if(!isset($_SESSION['user_name'])){?>
             <a href="login.php" class="btn">login</a>
             <a href="register.php" class="btn">register</a>
+            <?php } ?>
             <form method="post">
                 <?php if(isset($_SESSION['user_name'])){?><button type="submit" name="logout" class="logout-btn">log out</button><?php } ?>
             </form>
