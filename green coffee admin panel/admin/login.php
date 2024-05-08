@@ -3,9 +3,6 @@
 
     session_start();
     if(isset($_POST['login'])){
-
-        
-
         $email = $_POST['email'];
         $email = filter_var($email, FILTER_SANITIZE_STRING);
 
@@ -26,14 +23,6 @@
         
     }
 ?>
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

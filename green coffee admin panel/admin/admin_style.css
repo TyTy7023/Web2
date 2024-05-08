@@ -41,7 +41,8 @@ body{
 .form-container p{
     color: var(--green);
 }
-.form-container form button{
+.form-container form button,
+.form-container form a{
     width: 100%;
     padding: 1rem;
     border-radius: 20px;
@@ -98,15 +99,16 @@ ul{
     color: #fff;
 }
 .empty,.message{
-    border-radius: .5rem;
-    background: var(--green);
-    padding: 1.5rem;
     text-align: center;
-    font-weight: 100%;
-    font-size: 1.5rem;
     text-transform: capitalize;
-    line-height: 1;
-    color: #fff;
+    margin: 1rem auto;
+    width: 59%;
+    padding: .5rem 1.5rem ;
+    border-radius: 5px;
+    background: var(--light-green);
+    color: var(--green);
+    border: 1px solid var(--green);
+    justify-content: center;
 }
 input,textarea,button,select{
     background: transparent;
@@ -170,6 +172,7 @@ textarea{
     margin: 1rem;
 }
 .heading{
+    color: var(--green);
     font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
@@ -178,7 +181,7 @@ textarea{
 }
 section, .post-editor{
     width: 75vw;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     border-radius: 10px;
     padding: 4%;
     margin: 0% 4%;
@@ -504,6 +507,11 @@ header.scrolled a:hover {
     color: #87a243;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

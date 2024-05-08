@@ -123,8 +123,7 @@
                             
                             <div class="input-field">
                                 <label>update status</label>
-                                <select name="status">
-                                    <option selected disabled value="<?= $fetch_product['status'] ?><?= $fetch_product['status'] ?>"></option>
+                                <select name="status" value="<?= $fetch_product['status'] ?><?= $fetch_product['status'] ?>">
                                     <option value="active">active</option>
                                     <option value="deactive">deactive</option>
                                 </select>

@@ -8,7 +8,16 @@
     if(!isset($admin_id)){
         header('location: login.php');
     }
-
+    // Khởi tạo câu truy vấn dựa trên loại sản phẩm được chọn
+    $status = isset($_GET['status']) ? $_GET['status'] : '';
+    if (!empty($status)) {
+        $select_products = $conn->prepare("SELECT * FROM `product` WHERE status = ?");
+        $select_products->execute([$status]);
+    } else {
+        // Nếu không có loại sản phẩm được chọn, truy vấn tất cả sản phẩm
+        $select_products = $conn->prepare("SELECT * FROM `product`");
+        $select_products->execute();
+    }
     //delete product
 
     if(isset($_POST['delete'])){
@@ -30,6 +39,8 @@
 
         header('location:view_product.php');
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,20 +59,28 @@
                 <h1>all products</h1>
             </div>
             <div class="title2">
-                <a href="dashboard.php">dashboard</a><span> / all products</span>
+                <a href="dashboard.php">dashboard</a></span><?php if(!empty($status)) echo '<span> / ' . ucfirst($status) . '</span>'; else echo "/ALL product"?>
             </div>
                 <section class="show-post">
-                    <h1 class="heading">all products</h1>
                     <div class="box-container">
                         <?php
-                            $select_products = $conn->prepare("SELECT * FROM product");
-                            $select_products-> execute();
+                        if($status === 'all') {
+                            // Nếu người dùng chọn "all", truy vấn tất cả sản phẩm
+                            $select_products = $conn->prepare("SELECT * FROM `product`");
+                            $select_products->execute();
+                        } else if (!empty($status)) {
+                            // Nếu có một status được chọn, truy vấn sản phẩm trong status đó
+                            $select_products = $conn->prepare("SELECT * FROM `product` WHERE status = ?");
+                            $select_products->execute([$status]);
+                        } else {
+                            // Nếu không có status được chọn, truy vấn tất cả sản phẩm
+                            $select_products = $conn->prepare("SELECT * FROM `product`");
+                            $select_products->execute();
+                        }
 
                             if($select_products-> rowCount() > 0){
                                 while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC))
                                 {
-
-                                
                             ?>
                             <form action="" method="post" class="box">
                                 <input type="hidden" name="product_id" value="<?= $fetch_products['id'];
@@ -79,20 +98,23 @@
                                     <a href="read_product.php?post_id=<?= $fetch_products['id']; ?>" class="btn">view</a>
                                 </div>
                             </form>
-                            <?php
+                    <?php
                                 }
                             }
                             else{
-                                echo '
-                                <div class="empty">
-                                    <p>no product added yet! <br> <a href="add_products.php style="margin-top:1.5rem; class="btn">add product</a></p>
-                                    </div>
+                                echo '</div>
+                                <div class="empty"><p>no product added yet!</p></div>
+                                <div class="container">
+                                <a href="add_products.php" class="btn">add product</a>
+                                </div>
+                                
+                                    
                                 ';
 
                             }
-                            ?>
-                    </div>
+                    ?>
                 </section>
+                
         </div>
 
         <!-- sweetalert cdn link -->

@@ -29,12 +29,8 @@
                 <a href="dashboard.php">home</a><span> / dashboard</span>
             </div>
                 <section class="dashboard">
-                    <h1 class="heading">dashboard</h1>
+                    <h1 class="heading">welcome! <span><?= $fetch_profile['name']; ?></span></h1>
                     <div class="box-container">
-                        <div class="box">
-                            <h3>welcome! <span><?= $fetch_profile['name']; ?></span></h4>                            
-                            <img src="../img/<?= $fetch_profile['profile']; ?>" alt="">
-                        </div>
                         <div class="box">
                             <?php
                             $select_product = $conn->prepare("SELECT * FROM product");
@@ -53,7 +49,7 @@
                             ?>
                             <h3><?= $num_of_products; ?></h3>
                             <p>total active products</p>
-                            <a href="view_product.php" class="btn">view active products</a>
+                            <a href="view_product.php?status=active" class="btn">view active products</a>
                         </div>
                         <div class="box">
                             <?php
@@ -63,7 +59,7 @@
                             ?>
                             <h3><?= $num_of_deactive_products; ?></h3>
                             <p>total deactive products</p>
-                            <a href="view_product.php" class="btn">view deactive products</a>
+                            <a href="view_product.php?status=deactive" class="btn">view deactive products</a>
                         </div>
                         <div class="box">
                             <?php
