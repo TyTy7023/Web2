@@ -180,12 +180,12 @@ textarea{
     margin-bottom: 1rem;
 }
 section, .post-editor{
-    width: 75vw;
+    width: 100%;
     /* min-height: 100vh; */
     border-radius: 10px;
-    padding: 4%;
-    margin: 0% 4%;
+    padding: 0 4%;
     margin-bottom: 2%;
+    align-items: center;
 }
 .edit-post .flex-btn .btn{
     width: 33%;

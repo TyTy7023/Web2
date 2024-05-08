@@ -128,6 +128,8 @@ CREATE TABLE `admin` (
 
 DROP TABLE IF EXISTS contact;
 CREATE TABLE `contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  primary key(id),
   `name` varchar(50) NOT NULL,
   primary key(name),
   `email` varchar(100) NOT NULL,

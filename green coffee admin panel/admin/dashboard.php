@@ -47,7 +47,7 @@
                             $select_active_product->execute(['active']);
                             $num_of_active_products = $select_active_product->rowCount();
                             ?>
-                            <h3><?= $num_of_products; ?></h3>
+                            <h3><?= $num_of_active_products; ?></h3>
                             <p>total active products</p>
                             <a href="view_product.php?status=active" class="btn">view active products</a>
                         </div>
@@ -68,18 +68,8 @@
                             $num_of_users = $select_users->rowCount();
                             ?>
                             <h3><?= $num_of_users; ?></h3>
-                            <p>registered users</p>
+                            <p>Manager users</p>
                             <a href="user_account.php" class="btn">view users</a>
-                        </div>
-                        <div class="box">
-                            <?php
-                            $select_admin = $conn->prepare("SELECT * FROM admin");
-                            $select_admin->execute();
-                            $num_of_admin = $select_admin->rowCount();
-                            ?>
-                            <h3><?= $num_of_admin; ?></h3>
-                            <p>registered admin</p>
-                            <a href="admin_message.php" class="btn">view admin</a>
                         </div>
                         <div class="box">
                             <?php

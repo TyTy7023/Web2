@@ -54,7 +54,7 @@
                                 $order_id = $fetch_order['id']; // ID đặt hàng hiện tại
                                 $select_products = $conn->prepare("SELECT * FROM product WHERE id =? ");
                                 $select_products->execute([$fetch_order['product_id']]);
-                                if ($order_id != $last_order_id) { // Kiểm tra nếu ngày đặt hàng khác với ngày đặt hàng trước đó
+                                if ($order_id != $last_order_id) { // Kiểm tra nếu id đặt hàng khác với id đặt hàng trước đó
                                     if ($last_order_id !== null) {
                                         echo '</div>'; // Đóng nhóm trước (nếu có)
                                     }// Tạo một nhóm mới

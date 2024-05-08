@@ -14,13 +14,13 @@
         $delete_id = $_POST['delete_id'];
         $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
 
-        $verify_delete = $conn->prepare("SELECT * FROM 'message' WHERE id = ?");
+        $verify_delete = $conn->prepare("SELECT * FROM contact WHERE id = ?");
         $verify_delete->execute(['$delete_id']);
-
+        
         if($verify_delete->rowCount() > 0)
         {
-            $delete_message = $conn->prepare("DELETE FROM 'message' WHERE id = ?");
-            $delete_message->execute(['delete_id']);
+            $delete_message = $conn->prepare("DELETE FROM contact WHERE id = ?");
+            $delete_message->execute(['$delete_id']);
             $success_msg[] = 'message deleted';
         }
         else{
@@ -51,25 +51,21 @@
                     <h1 class="heading">unread message's</h1>
                     <div class="box-container">
                         <?php
-                            $select_message = $conn->prepare("SELECT * FROM message");
+                            $select_message = $conn->prepare("SELECT * FROM contact");
                             $select_message->execute();
 
                             if($select_message->rowCount() > 0){
                                 while($fetch_message = $select_message->fetch(PDO::FETCH_ASSOC)){
-                                    $user_id = $fetch_users['id'];
-
-                            
-
-                            
                         ?>
                         <div class="box">
                                     <h3 class="name"><?= $fetch_message['name']; ?></h3>
-                                    <h4><?= $fetch_message['subject']; ?></h4>
+                                    <h4><?= $fetch_message['email']; ?></h4>
                                     <p><?= $fetch_message['message']; ?></p>
                                     <form action="" method="post" class="flex-btn">
                                         <input type="hidden" name="delete_id" value="<?= $fetch_message['id']; ?>">
                                         <button type="submit" name="delete" class="btn" onclick="return confirm('delete this message');">delete message</button>
                                     </form>
+                        </div>
                         <?php
                                 }
                             }else{

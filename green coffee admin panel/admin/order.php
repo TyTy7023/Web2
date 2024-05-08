@@ -75,12 +75,6 @@
 
                             if($select_orders->rowCount() > 0){
                                 while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
-                                    
-                                    
-                        
-                            
-
-                            
                         ?>
                         <div class="box">
                             <div class="status" style="color: <?php if($fetch_orders['status']=='in progress')

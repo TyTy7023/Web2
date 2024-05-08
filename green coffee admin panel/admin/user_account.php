@@ -60,7 +60,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Coffee Admin Panel - Register Users Page</title>
+    <title>Green Coffee Admin Panel - Users Page</title>
     <!-- sweetalert cdn link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
@@ -74,19 +74,19 @@
     <?php include'../components/admin_header.php';?>
     <div class="main">
         <div class="banner">
-            <h1>Register Users</h1>
+            <h1>Manager Users</h1>
         </div>
         <div class="title2">
-            <a href="dashboard.php">Dashboard</a><span> / Register Users</span>
+            <a href="dashboard.php">Dashboard</a><span> / Manager Users</span>
         </div>
-        <!-- Biểu mẫu thêm người dùng mới -->
-        <section class="add-user-form">
-            <h1 class="heading">Add New User</h1>
-            <button onclick="location.href='register_user.php'" type="button">Add User</button>
-        </section>
+        
         <!-- Danh sách người dùng đã đăng ký -->
         <section class="accounts">
             <h1 class="heading">Registered Users</h1>
+        <!-- Biểu mẫu thêm người dùng mới -->
+        <section>
+            <button onclick="location.href='register_user.php'" type="button" class="btn" style="height:3rem;">Add User</button>
+        </section>
             <div class="box-container">
                 <?php
                     $select_users = $conn->prepare("SELECT * FROM users");
