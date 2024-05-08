@@ -121,18 +121,17 @@ label{
     text-transform: capitalize;
 }
 
-input,
-textarea{
-    background: #fff;
+input, textarea, button, select {
+    background: transparent;
+    border-radius: 20px;
+    padding: 1rem;
     border: none;
     outline: none;
-    padding: .6rem;
-    box-shadow: var(--box-shadow);
-    margin: .5rem 0;
-    border: 1px solid var(--green);
     width: 100%;
+    margin: 1rem 0;
+    box-shadow: var(--box-shadow);
+    font-size: 20px;
 }
-
 button{
     background: transparent;
     border: none;
@@ -1029,8 +1028,8 @@ textarea{
     width: 85%;
     color: grey;
     box-shadow: var(--box-shadow);
-    border: 1px solid var(--green);
-    padding: .5rem;
+    /* border: 1px solid var(--green); */
+    padding: 1rem;
     margin: 1rem 0;
 }
 .checkout .row form .flex{
