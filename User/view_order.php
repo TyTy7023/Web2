@@ -92,7 +92,7 @@
                             <p class="user"><i class='bx bxs-map'></i> <?= $fetch_order['address']; ?></P>
 
                             <p class="title">status</p>
-                            <p class="status" style="color :<?php if ($fetch_order['status'] == 'delevered') {
+                            <p class="status" style="color :<?php if ($fetch_order['status'] == 'delivered') {
                                                                 echo 'green';
                                                             } elseif ($fetch_order['status'] == 'canceled') {
                                                                 echo 'red';

@@ -8,6 +8,51 @@
     if(!isset($admin_id)){
         header('location: login.php');
     }
+
+    // Sửa thông tin người dùng
+    if(isset($_POST['edit_user'])){
+        $user_id = $_POST['user_id'];
+        // Chuyển hướng đến trang fix_info.php để chỉnh sửa thông tin của người dùng với ID tương ứng
+        header("Location: fix_info.php?user_id=$user_id");
+        exit();
+    }
+
+    // Xóa người dùng
+    if(isset($_POST['delete_user'])){
+        $user_id = $_POST['user_id'];
+        // Xóa người dùng từ cơ sở dữ liệu
+        $delete_user = $conn->prepare("DELETE FROM users WHERE id = :id");
+        $delete_user->bindParam(':id', $user_id);
+        $delete_user->execute();
+        // Thực hiện chuyển hướng hoặc hiển thị thông báo
+        if($delete_user){
+            header('location: user_account.php');
+        } else {
+            echo "<script>alert('Failed to delete user');</script>";
+        }
+    }
+
+    // Khóa hoặc mở người dùng
+    if(isset($_GET['toggle_user'])){
+        $user_id = $_GET['toggle_user'];
+        $user_status = $_GET['status'];
+        // Cập nhật trạng thái người dùng trong cơ sở dữ liệu
+        $toggle_user = $conn->prepare("UPDATE users SET status = :status WHERE id = :id");
+        $toggle_user->bindParam(':status', $user_status);
+        $toggle_user->bindParam(':id', $user_id);
+        $toggle_user->execute();
+        // Thực hiện chuyển hướng hoặc hiển thị thông báo
+        if($toggle_user){
+            if($user_status == 'blocked') {
+                echo "<script>alert('User has been blocked');</script>";
+            } else {
+                echo "<script>alert('User has been unblocked');</script>";
+            }
+            header('location: user_account.php');
+        } else {
+            echo "<script>alert('Failed to toggle user status');</script>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,63 +60,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="admin_style.css?v=<?php echo time(); ?>">
-    <title>green coffee admin panel - register user's page</title>
+    <title>Green Coffee Admin Panel - Register Users Page</title>
+    <!-- sweetalert cdn link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <!-- custom js link -->
+    <script type="text/javascript" src="./script.js"></script>
+
+    <!-- CSS link -->
+    <link rel="stylesheet" type="text/css" href="admin_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
-<?php include'../components/admin_header.php';?>
-        <div class="main">
-            <div class="banner">
-                <h1>register user's</h1>
-            </div>
-            <div class="title2">
-                <a href="dashboard.php">dashboard</a><span> / register user's</span>
-            </div>
-                <section class="accounts">
-                    <h1 class="heading">register user's</h1>
-                    <div class="box-container">
-                        <?php
-                            $select_users = $conn->prepare("SELECT * FROM users");
-                            $select_users->execute();
-
-                            if($select_users->rowCount() > 0){
-                                while($fetch_users = $select_users->fetch(PDO::FETCH_ASSOC)){
-                                    $user_id = $fetch_users['id'];
-
-                            
-
-                            
-                        ?>
-                        <div class="box">
-                            <div class="profile">
-                            </div>
-                            <p>user id : <span><?= $fetch_users['id']; ?></span></p>
-                            <p>user name : <span><?= $fetch_users['name']; ?></span></p>
-                            <p>user email : <span><?= $fetch_users['email']; ?></span></p>
-                        
-                        </div>
-                        <?php
-                                }
-                            }else{echo '
-                            <div class="empty">
-                                <p>no user register yet!</p>
-                                </div>
-                            ';
-                            }
-                        ?>
-                    </div>
-                </section>
+    <?php include'../components/admin_header.php';?>
+    <div class="main">
+        <div class="banner">
+            <h1>Register Users</h1>
         </div>
+        <div class="title2">
+            <a href="dashboard.php">Dashboard</a><span> / Register Users</span>
+        </div>
+        <!-- Biểu mẫu thêm người dùng mới -->
+        <section class="add-user-form">
+            <h1 class="heading">Add New User</h1>
+            <button onclick="location.href='register_user.php'" type="button">Add User</button>
+        </section>
+        <!-- Danh sách người dùng đã đăng ký -->
+        <section class="accounts">
+            <h1 class="heading">Registered Users</h1>
+            <div class="box-container">
+                <?php
+                    $select_users = $conn->prepare("SELECT * FROM users");
+                    $select_users->execute();
 
-        <!-- sweetalert cdn link -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-        <!-- custom js link -->
-        <script type="text/javascript" src="./script.js"></script>
-    
-        <!-- alert -->
-        <?php include '../components/alert.php'; ?>
-        
-    </body>
+                    if($select_users->rowCount() > 0){
+                        while($fetch_users = $select_users->fetch(PDO::FETCH_ASSOC)){
+                            $user_id = $fetch_users['id'];
+                            $user_status = $fetch_users['status'];
+                ?>
+                <div class="box">
+                    <!-- Hiển thị thông tin người dùng -->
+                    <p>User ID: <span><?= $fetch_users['id']; ?></span></p>
+                    <p>User Name: <span><?= $fetch_users['name']; ?></span></p>
+                    <p>User Email: <span><?= $fetch_users['email']; ?></span></p>
+                    <!-- Biểu mẫu sửa thông tin người dùng -->
+                    <form method="POST" action="">
+                        <input type="hidden" name="user_id" value="<?= $user_id ?>">
+                        <button type="submit" name="edit_user">Edit</button>
+                    </form>
+                    <!-- Nút khoá hoặc mở người dùng -->
+                    <form method="GET" action="">
+                        <input type="hidden" name="toggle_user" value="<?= $user_id ?>">
+                        <input type="hidden" name="status" value="<?= $user_status == 'active' ? 'blocked' : 'active' ?>">
+                        <button type="submit"><?= $user_status == 'active' ? 'Block' : 'Unblock' ?></button>
+                    </form>
+                    <!-- Nút xóa người dùng -->
+                    
+                </div>
+                <?php
+                        }
+                    } else {
+                        echo '<div class="empty"><p>No user registered yet!</p></div>';
+                    }
+                ?>
+            </div>
+        </section>
+    </div>
+</body>
 </html>
