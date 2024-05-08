@@ -176,7 +176,7 @@
                 <?php 
                     }
                 } else {
-                    echo "<h3>No products found.</h3>";
+                    echo '<p></p><p class="empty">No products added yet.</p>';
                 }
                 ?>
             </div>

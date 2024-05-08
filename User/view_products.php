@@ -90,6 +90,9 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Green Coffee - Shop Page</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -117,6 +120,7 @@
         </div>
         <section class="products">
             <div class="box-container">
+                
                 <?php
                 $products_per_page = 6; // Số sản phẩm trên mỗi trang
                 $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Xác định trang hiện tại

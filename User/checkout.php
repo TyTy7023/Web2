@@ -5,7 +5,8 @@
         $user_id = $_SESSION['user_id'];
     }
     else{
-        $user_id='';
+        echo '<script> alert("Please login first");
+        location.href="login.php"</script>';
     }
     if(isset($_POST['logout'])){
         session_destroy();
@@ -14,7 +15,7 @@
     }
 
     if (isset($_POST['place_order'])) {
-
+        $currentDate = date('Y-m-d');
         $name = $_POST['name'];
         $name = filter_var($name, FILTER_SANITIZE_STRING);
         $number = $_POST['number'];
@@ -26,19 +27,18 @@
         $address_type = $_POST['address_type'];
         $address_type =filter_var($address_type, FILTER_SANITIZE_STRING);
         $method = $_POST['method'];
-        echo $method;
         $method = filter_var($method, FILTER_SANITIZE_STRING);
         
         $varify_cart = $conn->prepare("SELECT * FROM cart WHERE user_id =? ");
         $varify_cart->execute([$user_id]);
-        
+        $order_id = unique_id(); 
         if (isset($_GET['get_id'])) {
             $get_product =$conn->prepare("SELECT * FROM product WHERE id =? LIMIT 1");
             $get_product->execute([$_GET['get_id']]);
             if ($get_product->rowCount() >0) {
                 while($fetch_p=$get_product->fetch(PDO :: FETCH_ASSOC)){
-                    $insert_order = $conn->prepare("INSERT INTO `orders` (id, user_id, name, number, email, address, address_type, method, product_id, price, qty) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-                    $insert_order->execute([unique_id(), $user_id, $name, $number, $email, $address, $address_type, $method, $fetch_p['id'], $fetch_p['price'], 1]);
+                    $insert_order = $conn->prepare("INSERT INTO `orders` (id, user_id, name, number, email, address, address_type, method, product_id, price, qty, date, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    $insert_order->execute([$order_id, $user_id, $name, $number, $email, $address, $address_type, $method, $fetch_p['id'], $fetch_p['price'], 1, $currentDate, 'In process']);
                     header('Location: order.php');
         
                 }
@@ -47,8 +47,8 @@
             }
         }elseif($varify_cart->rowCount() > 0){
             while($fetch_cart = $varify_cart->fetch(PDO::FETCH_ASSOC)){
-                $insert_order = $conn->prepare("INSERT INTO `orders` (id, user_id, name, number, email, address, address_type, method, product_id, price, qty) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-                $insert_order->execute([unique_id(), $user_id, $name, $number, $email, $address, $address_type, $method, $fetch_cart['product_id'], $fetch_cart['price'], $fetch_cart['qty']]);
+                $insert_order = $conn->prepare("INSERT INTO `orders` (id, user_id, name, number, email, address, address_type, method, product_id, price, qty, date, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                $insert_order->execute([$order_id, $user_id, $name, $number, $email, $address, $address_type, $method, $fetch_cart['product_id'], $fetch_cart['price'], $fetch_cart['qty'], $currentDate, 'In process']);
                 header('Location: order.php');
             }
             if($insert_order){
@@ -101,7 +101,7 @@
                                 $grand_total = 0;
                                 if(isset($_GET['get_id'])){
                                     $select_get = $conn->prepare("SELECT * FROM product WHERE id = ?");
-                                    $select_get->execute($_GET['get_id']);
+                                    $select_get->execute(array($_GET['get_id']));
                                     while($fetch_get = $select_get->fetch(PDO::FETCH_ASSOC)){
                                         $sub_total = $fetch_get['price'];
                                         $grand_total += $sub_total;
@@ -145,6 +145,29 @@
                         <p>$<?= $grand_total?>/-</p>
                     </div>
                 </div>
+
+                <?php
+                    // Assuming $conn is your PDO connection and $user_id is the user's ID
+                    $address_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
+                    $address_user->execute([$user_id]);
+                    $fetch_address = $address_user->fetch(PDO::FETCH_ASSOC);
+
+                    $temp_address = $fetch_address['address'];
+                    $info_address = explode(",", $temp_address);
+
+                    $flat = $info_address[0];
+                    $street = $info_address[1];
+                    $city = $info_address[2];
+                    $country = $info_address[3];
+                    $pincode = $info_address[4];
+
+                    $address_type = $fetch_address['address_type'];
+
+                    $number = $fetch_address['number'];
+                    
+
+                   
+                ?>
                 <form method="post">
                     <h3>Billing Details</h3>
                     <div class="flex">
@@ -152,16 +175,18 @@
                             <div class="input-field">
                                 <p>Your name <span>*</span></p>
                                 <input type="text" name="name" required maxlength="50" placeholder="Enter Your Name"
+                                    <?php if(isset($_SESSION['user_name'])){echo 'value="'.$_SESSION['user_name'].'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
                                 <p>Your number <span>*</span></p>
-                                <input type="number" name="number" required maxlength="50"
+                                <input type="number" name="number" required maxlength="50" <?php if(isset($number)){echo 'value="'.$number.'"';}?>
                                     placeholder="Enter Your Number" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Your email <span>*</span></p>
                                 <input type="email" name="email" required maxlength="50" placeholder="Enter Your Email"
+                                    <?php if(isset($_SESSION['user_email'])){echo 'value="'.$_SESSION['user_email'].'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
@@ -182,27 +207,27 @@
                         <div class="box">
                             <div class="input-field">
                                 <p>Address line 01<span>*</span></p>
-                                <input type="text" name="flat" required maxlength="50"
+                                <input type="text" name="flat" required maxlength="50" <?php if(isset($flat)){echo 'value="'.$flat.'"';}?>
                                     placeholder="e.g flat & building number" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Address line 02<span>*</span></p>
-                                <input type="text" name="street" required maxlength="50" placeholder="e.g street"
+                                <input type="text" name="street" required maxlength="50" placeholder="e.g street" <?php if(isset($street)){echo 'value="'.$street.'"';}?>
                                     class="input">
                             </div>
                             <div class="input-field">
                                 <p>City name<span>*</span></p>
-                                <input type="text" name="city" required maxlength="50"
+                                <input type="text" name="city" required maxlength="50" <?php if(isset($city)){echo 'value="'.$city.'"';}?>
                                     placeholder="enter your city name" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Country name<span>*</span></p>
-                                <input type="text" name="country" required maxlength="50"
+                                <input type="text" name="country" required maxlength="50" <?php if(isset($country)){echo 'value="'.$country.'"';}?>
                                     placeholder="enter your city name" class="input">
                             </div>
                             <div class="input-field">
                                 <p>Pincode<span>*</span></p>
-                                <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0"
+                                <input type="text" name="pincode" required maxlength="6" placeholder="110022" min="0" <?php if(isset($pincode)){echo 'value="'.$pincode.'"';}?>
                                     max="999999" class="input">
                             </div>
                         </div>
