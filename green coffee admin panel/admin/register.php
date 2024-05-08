@@ -92,7 +92,7 @@
 
                     <div class="input-field">
                         <label for="">select profile <sup>*</sup></label>
-                        <input type="file" name="image" accept="image/*">
+                        <input type="file" name="image" accept="../image/*">
                     </div>
                     <button type="submit" name="register" class="btn">register now</button>
                     <p>already have an account ? <a href="login.php">login now</a></p>

@@ -32,9 +32,8 @@
                     <h1 class="heading">dashboard</h1>
                     <div class="box-container">
                         <div class="box">
-                            <h3>welcome!</h3>
-                            <p><?= $fetch_profile['name']; ?></p>
-                            <a href="" class="btn">profile</a>
+                            <h3>welcome! <span><?= $fetch_profile['name']; ?></span></h4>                            
+                            <img src="../img/<?= $fetch_profile['profile']; ?>" alt="">
                         </div>
                         <div class="box">
                             <?php
@@ -88,7 +87,7 @@
                         </div>
                         <div class="box">
                             <?php
-                            $select_message = $conn->prepare("SELECT * FROM message");
+                            $select_message = $conn->prepare("SELECT * FROM contact");
                             $select_message->execute();
                             $num_of_message = $select_message->rowCount();
                             ?>
