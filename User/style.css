@@ -121,7 +121,7 @@ label{
     text-transform: capitalize;
 }
 
-input, textarea {
+input, textarea, select {
     background: transparent;
     border-radius: 20px;
     padding: 1rem;
@@ -202,7 +202,7 @@ button{
 }
 .title2 .search-form select {
     margin-left: 10px;
-    border: 1px solid var(--green);
+    /* border: 1px solid var(--green); */
     box-shadow: var(--box-shadow);
     cursor: pointer;
     padding: 8px 16px;
@@ -1028,7 +1028,7 @@ textarea{
     color: grey;
     box-shadow: var(--box-shadow);
     /* border: 1px solid var(--green); */
-    padding: 1rem;
+    padding: .5rem;
     margin: 1rem 0;
 }
 .checkout .row form .flex{

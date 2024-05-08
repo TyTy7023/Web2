@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS product;
 CREATE TABLE `product` (
   `id` varchar(255) NOT NULL,
+  primary key(id),
   `name` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `price` BIGINT NOT NULL,
@@ -58,38 +59,47 @@ INSERT INTO `product` (`id`, `name`,`category`, `price`, `image`, `product_detai
 ('42', 'WIL MATCHA MILK TEA POWER', 'TEA', 77, '42.webp', 'Ingredients: Matcha green tea powder. Product Information: Made from high-quality matcha green tea leaves, this matcha tea offers a rich and vibrant flavor with a smooth texture. Preparation instructions: Mix 1 teaspoon of matcha powder with hot water (about 70-80°C) in a bowl. Whisk until frothy. Adjust the amount of matcha and water according to your preference. Enjoy hot or iced.','active'),
 ('47', 'GREEN COFFEE BEANS', 'TEA', 85, '47.jpg', 'Ingredients: Matcha green tea powder. Product Information: Made from high-quality matcha green tea leaves, this matcha tea offers a rich and vibrant flavor with a smooth texture. Preparation instructions: Mix 1 teaspoon of matcha powder with hot water (about 70-80°C) in a bowl. Whisk until frothy. Adjust the amount of matcha and water according to your preference. Enjoy hot or iced.','active');
 
-DROP TABLE IF EXISTS wishlist;
-CREATE TABLE `wishlist` (
-  `id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `product_id` varchar(255) NOT NULL,
-  `price` BIGINT NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS cart;
-CREATE TABLE `cart` (
-  `id` varchar(255) NOT NULL,
-  `user_id` varchar(255) NOT NULL,
-  `product_id` varchar(255) NOT NULL,
-  `price` BIGINT NOT NULL,
-  `qty` BIGINT NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS users;
 CREATE TABLE `users` (
   `id` varchar(255) NOT NULL,
+  primary key(id),
   `name` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `number` int(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `address_type` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `status` varchar(100) NOT NULL
+  `status` varchar(100) NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS wishlist;
+CREATE TABLE `wishlist` (
+  `id` varchar(255) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `price` BIGINT NOT NULL,
+  primary key(id),
+  foreign key (product_id) references product(id),
+  foreign key (user_id) references users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS cart;
+CREATE TABLE `cart` (
+  `id` varchar(255) NOT NULL,
+  primary key(id),
+  `user_id` varchar(255) NOT NULL,
+  `product_id` varchar(255) NOT NULL,
+  `price` BIGINT NOT NULL,
+  `qty` BIGINT NOT NULL,
+  foreign key (product_id) references product(id),
+  foreign key (user_id) references users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 
 DROP TABLE IF EXISTS orders;
 CREATE TABLE `orders` (
   `id` varchar(255) NOT NULL,
+  primary key(id),
   `user_id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `number` int(11) NOT NULL,
@@ -101,21 +111,25 @@ CREATE TABLE `orders` (
   `price` BIGINT NOT NULL,
   `qty` BIGINT NOT NULL,
   `date` DATE NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL DEFAULT 'In process',
+  foreign key (product_id) references product(id),
+  foreign key (user_id) references users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS admin;
 CREATE TABLE `admin` (
   `id` varchar(20) NOT NULL,
+  primary key(id),
   `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `profile` varchar(255) NOT NULL
+  `profile` varchar(255) NOT NULL DEFAULT '01.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS contact;
 CREATE TABLE `contact` (
   `name` varchar(50) NOT NULL,
+  primary key(name),
   `email` varchar(100) NOT NULL,
   `number` int(11) NOT NULL,
   `message` varchar(255) NOT NULL
