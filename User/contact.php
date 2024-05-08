@@ -12,6 +12,28 @@
         header('Location: login.php');
         exit;
     }
+    //insert data into database
+    if(isset($_POST['submit-btn'])){
+        $name = $_POST['name'];
+        $name = filter_var($name, FILTER_SANITIZE_STRING);
+        $email = $_POST['email'];
+        $email = filter_var($email, FILTER_SANITIZE_STRING);
+        $number = $_POST['number'];
+        $number = filter_var($number, FILTER_SANITIZE_STRING);
+        $message = $_POST['message'];
+        $message = filter_var($message, FILTER_SANITIZE_STRING);
+        
+        $insert_mess = $conn->prepare("INSERT INTO `contact` (name,email,number,message) VALUES (?,?,?,?)");
+        $result = $insert_mess->execute([$name, $email, $number, $message]); // Pass values to execute method
+        if($result){
+            $success_msg[] = "Thank you for contacting us! We will get back to you soon.";
+        }
+        else{
+            $warning_msg[] = "Something went wrong! Please try again.";
+        }
+    }
+    
+    
 ?>
 <style type="text/css">
 <?php include 'style.css';
