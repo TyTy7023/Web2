@@ -129,11 +129,11 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="input-field">
                             <label>product name <sup>*</sup></label>
-                            <input type="text" name="text" maxlength="100" required placeholder="add product name">
+                            <input type="text" name="name" maxlength="100" required placeholder="add product name">
                         </div>
                         <div class="input-field">
                             <label>product price <sup>*</sup></label>
-                            <input type="number" name="price" maxlength="100" requiredplaceholder="add product name">
+                            <input type="number" name="price" maxlength="100" required placeholder="add product price">
                             
                         </div>
                         <div class="input-field">

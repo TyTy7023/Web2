@@ -85,7 +85,7 @@
                             else{
                                 echo '
                                 <div class="empty">
-                                    <p>no product added yet! <br> <a href="add_products.php style="margin-top:1.5rem; class="btn">add product</a></p>
+                                    <p>no product added yet! <br> <a href="add_products.php" style="margin-top:1.5rem; class="btn">add product</a></p>
                                     </div>
                                 ';
 

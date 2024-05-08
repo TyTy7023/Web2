@@ -9,18 +9,18 @@
         header('location: login.php');
     }
     //delete order
-    if(isset($_POST['delete'])){
+    if(isset($_POST['delete_order'])){
 
         $order_id = $_POST['order_id'];
         $order_id = filter_var($order_id, FILTER_SANITIZE_STRING);
 
-        $verify_delete = $conn->prepare("SELECT * FROM 'orders' WHERE id = ?");
+        $verify_delete = $conn->prepare("SELECT * FROM orders WHERE id = ?");
         $verify_delete->execute(['$order_id']);
 
         if($verify_delete->rowCount() > 0)
         {
-            $delete_order= $conn->prepare("DELETE FROM 'orders' WHERE id = ?");
-            $delete_order->execute(['order_id']);
+            $delete_order= $conn->prepare("DELETE FROM orders WHERE id = ?");
+            $delete_order->execute(['$order_id']);
             $success_msg[] = 'order deleted';
         }
         else{
@@ -37,7 +37,7 @@
             $update_payment = filter_var($update_payment, FILTER_SANITIZE_STRING);
     
 
-            $update_pay = $conn->prepare("UPDATE'orders' SET payment_status = ? WHERE id = ?");
+            $update_pay = $conn->prepare("UPDATE orders SET payment_status = ? WHERE id = ?");
             
             $update_pay ->execute(['$update_payment ,$order_id']);
 
@@ -83,8 +83,8 @@
                             
                         ?>
                         <div class="box">
-                            <div class="status" style="color: <?php if($fetch_orders['status']=='in progress')
-                            {echo "green";}else{echo "red";} ?>;"><?=$fetch_orders['status']; ?></div>
+                            <div class="status" style="color: <?php if($fetch_orders['status'] == 'in progress')
+                            {echo "green";}else{echo "red";} ?>"><?=$fetch_orders['status']; ?></div>
                                 <div class="detail">
                                     <p>user name : <span><?= $fetch_orders['name']; ?></span> </p>
                                     <p>user id : <span><?= $fetch_orders['id']; ?></span> </p>
@@ -93,7 +93,7 @@
                                     <p>user email : <span><?= $fetch_orders['email']; ?></span> </p>
                                     <p>total price: <span><?= $fetch_orders['price']; ?></span> </p>
                                     <p>method : <span><?= $fetch_orders['method']; ?></span> </p>
-                                    <p>address : <span><?= $fetch_orders['address ']; ?></span> </p>
+                                    <p>address : <span><?= $fetch_orders['address']; ?></span> </p>
                                 </div>
                                 <form action="" method="post">
                                     <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
@@ -104,7 +104,7 @@
                                     </select>
                                     <div class="flex-btn">
                                         <button type="submit" name="update_order" class="btn">update payment</button>
-                                        <button type="submit" name="update_order" class="btn">delete order</button>
+                                        <button type="submit" name="delete_order" class="btn">delete order</button>
 
                                     </div>
 
