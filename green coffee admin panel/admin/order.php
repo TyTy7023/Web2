@@ -47,7 +47,6 @@
     $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +76,7 @@
             <h1 class="heading">all orders</h1>
             <div class="box-container">
             <?php
+            $last_order_id = null;
                 $select_orders = $conn->prepare("SELECT * FROM orders");
                 $select_orders->execute();
                 if ($select_orders->rowCount() > 0) {
@@ -85,6 +85,14 @@
                         $order_id = $fetch_order['id']; // Current order ID
                         $select_products = $conn->prepare("SELECT * FROM product WHERE id = ?");
                         $select_products->execute([$fetch_order['product_id']]);
+                        if ($order_id != $last_order_id) { // Kiểm tra nếu ngày đặt hàng khác với ngày đặt hàng trước đó
+                            if ($last_order_id !== null) {
+                                echo '</div>'; // Đóng nhóm trước (nếu có)
+                            }// Tạo một nhóm mới
+                            echo '<div class="order-group">';
+                            echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . ' -  Order id: <i>' .$fetch_order['id'] .'</i></h3>';
+                            $last_order_id = $order_id; // Cập nhật ID đặt hàng cuối cùng
+                        }
                         if ($select_products->rowCount() > 0) {
                             $fetch_product = $select_products->fetch(PDO::FETCH_ASSOC);
             ?>
@@ -104,7 +112,7 @@
                     <form action="" method="post">
                         <input type="hidden" name="order_id" value="<?php echo $fetch_order['id']; ?>">
                         <select name="update_payment">
-                            <option disabled selected><?php echo $fetch_order['payment_status']; ?></option>
+                            <option disabled selected><?php echo $fetch_order['status']; ?></option>
                             <option value="pending">pending</option>
                             <option value="in progress">procesed</option>
                         </select>

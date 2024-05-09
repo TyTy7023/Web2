@@ -168,8 +168,6 @@ textarea{
     width: 300px;
 }
 .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     align-items: center;
     justify-content: center;
 }
@@ -516,6 +514,7 @@ header.scrolled a:hover {
     color: #87a243;
 }
 .order-container .box-container .box{
+    background-color: #fff;
     font-size: 1rem;
     box-shadow: var(--box-shadow);
     border-radius: .5rem;
@@ -559,8 +558,25 @@ header.scrolled a:hover {
     margin-left: 10px;
 }
 
+.order-container .status{
+    position: absolute;
+    left: 5%;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem 1.5rem;
+    display: inline-block;
+    background: var(--light-green); 
+    border-radius: .5rem;
+}
 
-
+.order-group {
+    margin-bottom: 20px; /* Khoảng cách dưới giữa các nhóm đơn hàng */
+    border: 1px solid #ccc; /* Đường viền của nhóm đơn hàng */
+    padding: 10px; /* Khoảng cách bên trong nhóm đơn hàng */
+    border-radius: 5px; /* Độ cong của góc */
+    background-color: var(--light-green); /* Màu nền của nhóm đơn hàng */
+}
 
 
 
