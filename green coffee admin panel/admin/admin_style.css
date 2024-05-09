@@ -160,6 +160,11 @@ section, .post-editor{
     margin: .5rem;
     text-align: center;
 }
+.edit-post .input-field img{
+    width: 100%;
+    margin: .5rem;
+    text-align: center;
+}
 /*-----------------------scroll bar-------------------*/
 ::-webkit-scrollbar{
     width: 4px;
