@@ -9,18 +9,18 @@
         header('location: login.php');
     }
     //delete order
-    if(isset($_POST['delete'])){
+    if(isset($_POST['delete_order'])){
 
         $order_id = $_POST['order_id'];
         $order_id = filter_var($order_id, FILTER_SANITIZE_STRING);
 
-        $verify_delete = $conn->prepare("SELECT * FROM 'orders' WHERE id = ?");
+        $verify_delete = $conn->prepare("SELECT * FROM orders WHERE id = ?");
         $verify_delete->execute(['$order_id']);
 
         if($verify_delete->rowCount() > 0)
         {
-            $delete_order= $conn->prepare("DELETE FROM 'orders' WHERE id = ?");
-            $delete_order->execute(['order_id']);
+            $delete_order= $conn->prepare("DELETE FROM orders WHERE id = ?");
+            $delete_order->execute(['$order_id']);
             $success_msg[] = 'order deleted';
         }
         else{
@@ -37,7 +37,7 @@
             $update_payment = filter_var($update_payment, FILTER_SANITIZE_STRING);
     
 
-            $update_pay = $conn->prepare("UPDATE'orders' SET payment_status = ? WHERE id = ?");
+            $update_pay = $conn->prepare("UPDATE orders SET payment_status = ? WHERE id = ?");
             
             $update_pay ->execute(['$update_payment ,$order_id']);
 
@@ -69,52 +69,77 @@
                 <section class="order-container">
                     <h1 class="heading">order place</h1>
                     <div class="box-container">
-                        <?php
-                            $select_orders = $conn->prepare("SELECT * FROM orders");
-                            $select_orders->execute();
-
-                            if($select_orders->rowCount() > 0){
-                                while($fetch_orders = $select_orders->fetch(PDO::FETCH_ASSOC)){
-                        ?>
+                    <?php
+                    
+                    $last_order_id = null; // Biến lưu trữ ID đặt hàng cuối cùng
+                    $select_orders = $conn->prepare("SELECT * FROM orders");
+                    $select_products = $conn->prepare("SELECT * FROM product");
+                    $select_products->execute();
+                    $select_orders->execute();
+                    if ($select_orders->rowCount()>0) {
+                        while($fetch_order =$select_orders->fetch(PDO :: FETCH_ASSOC)){
+                                $order_id = $fetch_order['id']; // ID đặt hàng hiện tại
+                                $select_products = $conn->prepare("SELECT * FROM product WHERE id =? ");
+                                $select_products->execute([$fetch_order['product_id']]);
+                                if ($order_id != $last_order_id) { // Kiểm tra nếu ngày đặt hàng khác với ngày đặt hàng trước đó
+                                    if ($last_order_id !== null) {
+                                        echo '</div>'; // Đóng nhóm trước (nếu có)
+                                    }// Tạo một nhóm mới
+                                    echo '<div class="order-group">';
+                                    echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . ' -  Order id: <i>' .$fetch_order['id'] .'</i></h3>';
+                                    $last_order_id = $order_id; // Cập nhật ID đặt hàng cuối cùng
+                                }
+                                if ($select_products->rowCount()>0) {
+                                    while($fetch_product=$select_products->fetch(PDO :: FETCH_ASSOC)){ 
+                                         
+                                        $select_products = $conn->prepare("SELECT * FROM product");
+                                        $select_products-> execute();
+            
+                                        if($select_products-> rowCount() > 0){
+                                            while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC))
+                                            {
+                    ?>
+                        
                         <div class="box">
-                            <div class="status" style="color: <?php if($fetch_orders['status']=='in progress')
-                            {echo "green";}else{echo "red";} ?>;"><?=$fetch_orders['status']; ?></div>
+                            <div class="status" style="color: <?php if($fetch_order['status'] == 'in progress')
+                            {echo "green";}else{echo "red";} ?>"><?=$fetch_order['status']; ?></div>
                                 <div class="detail">
-                                    <p>user name : <span><?= $fetch_orders['name']; ?></span> </p>
-                                    <p>user id : <span><?= $fetch_orders['id']; ?></span> </p>
-                                    <p>placed on : <span><?= $fetch_orders['date']; ?></span> </p>
-                                    <p>user number : <span><?= $fetch_orders['number']; ?></span> </p>
-                                    <p>user email : <span><?= $fetch_orders['email']; ?></span> </p>
-                                    <p>total price: <span><?= $fetch_orders['price']; ?></span> </p>
-                                    <p>method : <span><?= $fetch_orders['method']; ?></span> </p>
-                                    <p>address : <span><?= $fetch_orders['address ']; ?></span> </p>
+                                    <p>user name : <span><?= $fetch_order['name']; ?></span> </p>
+                                    <p>user id : <span><?= $fetch_order['id']; ?></span> </p>
+                                    <p>placed on : <span><?= $fetch_order['date']; ?></span> </p>
+                                    <p>user number : <span><?= $fetch_order['number']; ?></span> </p>
+                                    <p>user email : <span><?= $fetch_order['email']; ?></span> </p>
+                                    <p>name product : <span><?= $fetch_products['name']; ?></span> </p>
+                                    <p>user email : <span><?= $fetch_order['email']; ?></span> </p>
+                                    <p>total price: <span><?= $fetch_order['price']; ?></span> </p>
+                                    <p>method : <span><?= $fetch_order['method']; ?></span> </p>
+                                    <p>address : <span><?= $fetch_order['address']; ?></span> </p>
                                 </div>
                                 <form action="" method="post">
-                                    <input type="hidden" name="order_id" value="<?= $fetch_orders['id']; ?>">
+                                    <input type="hidden" name="order_id" value="<?= $fetch_order['id']; ?>">
                                     <select name="update_payment">
-                                        <option disabled selected><?= $fetch_orders['payment_status']; ?></option>
-                                        <option value="pending">pending</option>
-                                        <option value="complete">complete</option>
+                                        <option disabled selected><?= $fetch_order['payment_status']; ?></option>
+                                        <option value="pending">delivered</option>
+                                        <option value="complete">cancled</option>
+                                        <option value="complete">in progress</option>
                                     </select>
                                     <div class="flex-btn">
                                         <button type="submit" name="update_order" class="btn">update payment</button>
-                                        <button type="submit" name="update_order" class="btn">delete order</button>
+                                        <button type="submit" name="delete_order" class="btn">delete order</button>
 
                                     </div>
 
                                 </form>
-                            
+                        </div>
                         <?php
                                 }
-                            }else{
-                                echo '
-                                    <div class="empty">
-                                    <p>no orders takes place yet!</p>
-                                    </div>
-                                ';
-                            }
-                        ?>
-                    </div>
+                            }   
+                        }
+                                }}
+                    }else{
+                        echo '<p></p><p class="empty">No orders have place yet</p>';
+                    }
+                ?>
                 </section>
         </div>
 
