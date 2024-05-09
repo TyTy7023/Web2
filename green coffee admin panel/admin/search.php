@@ -114,12 +114,11 @@
                         <input type="hidden" name="order_id" value="<?php echo $fetch_order['id']; ?>">
                         <select name="update_payment">
                             <option disabled selected><?php echo $fetch_order['payment_status']; ?></option>
-                            <option value="delivered">delivered</option>
-                            <option value="canceled">canceled</option>
-                            <option value="in progress">in progress</option>
+                            <option value="pending">pending</option>
+                            <option value="in progress">procesed</option>
                         </select>
                         <div class="flex-btn">
-                            <button type="submit" name="update_order" class="btn">update payment</button>
+                            <button type="submit" name="update_order" class="btn">mark order</button>
                             <button type="submit" name="delete_order" class="btn">delete order</button>
                         </div>
                     </form>
