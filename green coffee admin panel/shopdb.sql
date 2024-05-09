@@ -90,5 +90,25 @@ CREATE TABLE `orders` (
   `price` BIGINT NOT NULL,
   `qty` BIGINT NOT NULL,
   `date` DATE NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL,
+  `payment_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO `orders` (`id`, `user_id`,`name`, `number`, `email`, `address`, `address_type`,`method`,`product_id`,`price`, `qty`, `date`, `status`, `payment_status`  ) VALUES
+('UFW5bVPyvzuBiYoow9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-01-01','canceled','pending'),
+('dfgrffPyvzuBiYoow9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-02-02','canceled','pending'),
+('UFWtrghufguytfrhn9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-03-03','canceled','pending'),
+('UFW5trk8kjjfdbdhn9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-04-04','canceled','pending'),
+('bgftfbgncdjytfrhn9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-05-05','canceled','pending'),
+('UFW5bVPmjnhgfyjntnth','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-06-06','canceled','pending'),
+('UFW5bVP345vfddrhefgv','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-07-07','canceled','pending'),
+('zvs56VPdfguytfrhn9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-08-08','canceled','pending'),
+('VPdfguytfrhnvbndhtds','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-09-09','canceled','pending'),
+('UgnfW5bVPdfguytfrhng','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-10-10','canceled','pending'),
+('yt7uyVPdfguytfrhn9Gi','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-11-11','canceled','pending'),
+('UFW5bVPyvrtyuyi876th','q9CVnoMxPOEsBIlIURHr','duyen',1452,'duyen1234@gmail.com','ad,  ertyh,  5e66yu,  546yu,  1234','home','cash on delivery','3',53,1,'2024-12-12','canceled','pending');
+
+
+
+
+
