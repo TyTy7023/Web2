@@ -305,6 +305,7 @@ header.scrolled a:hover {
     padding: 1rem 2rem;
     text-transform: uppercase;
     box-shadow: var(--box-shadow);
+    margin-top: 5rem;
 }
 .title2 a{
     color: var(--green);
@@ -444,7 +445,7 @@ header.scrolled a:hover {
     color: #87a243;
 }
 .order-container .box-container .box{
-    font-size: 1.3rem;
+    font-size: 1rem;
     box-shadow: var(--box-shadow);
     border-radius: .5rem;
     padding: 2rem 1.5rem;
@@ -469,6 +470,37 @@ header.scrolled a:hover {
     margin-top: 3rem;
     text-transform: uppercase;
 }
+.search-order-box{
+    border-top: 1px solid var(--green);
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    box-shadow: var(--box-shadow);
+
+}
+.search-order-box a{
+    color: var(--green);
+}
+.search-order-box .search-form p{
+    color: #555;
+    padding-top: 1rem;
+}
+.search-order-box .search-form button{
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
 
 
 
