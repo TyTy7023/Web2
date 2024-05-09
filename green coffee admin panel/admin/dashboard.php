@@ -27,6 +27,7 @@
             </div>
             <div class="title2">
                 <a href="dashboard.php">home</a><span> / dashboard</span>
+                <a href="dashboard.php">home</a><span> / dashboard</span>
             </div>
                 <section class="dashboard">
                     <h1 class="heading">welcome! <span><?= $fetch_profile['name']; ?></span></h1>
@@ -34,15 +35,18 @@
                         <div class="box">
                             <?php
                             $select_product = $conn->prepare("SELECT * FROM product");
+                            $select_product = $conn->prepare("SELECT * FROM product");
                             $select_product->execute();
                             $num_of_products = $select_product->rowCount();
                             ?>
                             <h3><?= $num_of_products; ?></h3>
                             <p>products added</p>
                             <a href="add_products.php" class="btn">add new products</a>
+                            <a href="add_products.php" class="btn">add new products</a>
                         </div>
                         <div class="box">
                             <?php
+                            $select_active_product = $conn->prepare("SELECT * FROM product WHERE status = ?");
                             $select_active_product = $conn->prepare("SELECT * FROM product WHERE status = ?");
                             $select_active_product->execute(['active']);
                             $num_of_active_products = $select_active_product->rowCount();
@@ -53,6 +57,7 @@
                         </div>
                         <div class="box">
                             <?php
+                            $select_deactive_product = $conn->prepare("SELECT * FROM product WHERE status = ?");
                             $select_deactive_product = $conn->prepare("SELECT * FROM product WHERE status = ?");
                             $select_deactive_product->execute(['deactive']);
                             $num_of_deactive_products = $select_deactive_product->rowCount();
@@ -79,6 +84,7 @@
                             ?>
                             <h3><?= $num_of_message; ?></h3>
                             <p>unread message</p>
+                            <a href="admin_message.php" class="btn">view message</a>
                             <a href="admin_message.php" class="btn">view message</a>
                         </div>
                         <div class="box">
