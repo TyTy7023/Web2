@@ -164,6 +164,9 @@ textarea{
 .form-container form p a{
     color: red;
 }
+.form-container form img{
+    width: 300px;
+}
 .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -467,8 +470,11 @@ header.scrolled a:hover {
     background: var(--light-green);
 }
 .read-post form .image{
-    width: 80%;
-    margin-top: 1.5rem ;
+    margin-bottom: 5px;
+    margin-left: 30%;
+    height: 25%;
+    width: 40%;
+    margin-top: 1rem ;
 }
 .read-post form .price{
     position: absolute;
