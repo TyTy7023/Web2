@@ -62,7 +62,8 @@ if (isset($_POST['cancled'])) {
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+            margin: 20px 0;
+        
         }
         .billing-info p {
             margin: 10px 0;
@@ -79,7 +80,7 @@ if (isset($_POST['cancled'])) {
     .billing-info .user {
         font-size: 18px; /* Điều chỉnh kích thước phông chữ tại đây */
     }
-</style>
+
 
         .billing-info .status {
         font-weight: bold;
@@ -179,8 +180,8 @@ if (isset($_POST['cancled'])) {
                 } ?>">
                     <?= $fetch_order['status'] ?>
                 </p>
-                <?php if ($fetch_order['status'] == 'canceled') { ?>
-                    <a href="checkout.php?get_id=<?= $fetch_product['id']; ?>" class="btn">Order Again</a>
+                <?php if ($fetch_order['status'] == 'canceled') {  ?>
+                    <a href="view_products.php" class="btn">Order another</a>
                 <?php } else { ?>
                     <form method="post">
                         <button type="submit" name="cancled" class="btn" onclick="return confirm('Do you want to cancel this order')">Cancel Order</button>

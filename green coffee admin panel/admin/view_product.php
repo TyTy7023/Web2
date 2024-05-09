@@ -18,6 +18,10 @@
         $select_products = $conn->prepare("SELECT * FROM `product`");
         $select_products->execute();
     }
+    // echo $_GET['$success_msg'];
+    // if(isset($_GET['$success_msg'])){
+    //     $success_msg = 'Delete successful';
+    // }
     //delete product
 
     if(isset($_POST['delete'])){

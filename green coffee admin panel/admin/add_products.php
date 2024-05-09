@@ -29,6 +29,7 @@
         $image_size = $_FILES['image']['size'];
         $image_tmp_name = $_FILES['image']['tmp_name'];
         $image_folder = '../image/' .$image;
+        $image_folder2 = '../../User/image/' .$image;
 
         $select_image = $conn->prepare("SELECT * FROM product WHERE image = ?");
         $select_image-> execute([$image]);
@@ -42,6 +43,7 @@
             }
             else {
                 move_uploaded_file($image_tmp_name, $image_folder);
+                move_uploaded_file($image_tmp_name, $image_folder2);
             }           
         }
         else{
@@ -129,11 +131,11 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="input-field">
                             <label>product name <sup>*</sup></label>
-                            <input type="text" name="text" maxlength="100" required placeholder="add product name">
+                            <input type="text" name="name" maxlength="100" required placeholder="add product name">
                         </div>
                         <div class="input-field">
                             <label>product price <sup>*</sup></label>
-                            <input type="number" name="price" maxlength="100" requiredplaceholder="add product name">
+                            <input type="number" name="price" maxlength="100" required placeholder="add product price">
                             
                         </div>
                         <div class="input-field">

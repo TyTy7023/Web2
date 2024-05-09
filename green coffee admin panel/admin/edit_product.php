@@ -64,24 +64,27 @@
     //delete product
 
     if(isset($_POST['delete'])){
-
         $p_id = $_POST['product_id'];
         $p_id = filter_var($p_id, FILTER_SANITIZE_STRING);
-
+    
         $delete_image = $conn->prepare("SELECT * FROM product WHERE id = ?");
-        $delete_image->execute(['$p_id']);
-
+        $delete_image->execute([$p_id]);
         $fetch_delete_image = $delete_image->fetch(PDO::FETCH_ASSOC);
+    
+        if($fetch_delete_image){
+            if($fetch_delete_image['image'] != ''){
+                unlink('../image/'.$fetch_delete_image['image']);
+            }
+    
+            $delete_product = $conn->prepare("DELETE FROM product WHERE id=?");
+            $delete_product->execute([$p_id]);
+    
+            // 
+        } 
 
-        if($fetch_delete_image['image'] != ''){
-            unlink('../image/'.$fetch_delete_image['image']);
-
-        }
-        $delete_product = $conn->prepare("DELETE FROM product WHERE id=?");
-        $delete_product->execute([$p_id]);
-
-        header('location:view_product.php');
+        header('location:view_product.php?$success_msg = 1');
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -123,10 +126,11 @@
                             
                             <div class="input-field">
                                 <label>update status</label>
-                                <select name="status" value="<?= $fetch_product['status'] ?><?= $fetch_product['status'] ?>">
-                                    <option value="active">active</option>
-                                    <option value="deactive">deactive</option>
-                                </select>
+                                <select name="status">
+    <option value="deactive" <?php if ($fetch_product['status'] == 'deactive') echo 'selected="selected"'; ?>>deactive</option>
+    <option value="active" <?php if ($fetch_product['status'] == 'active') echo 'selected="selected"'; ?>>active</option>
+</select>
+
                             </div>
                             <div class="input-field">
                                 <label>product name</label>

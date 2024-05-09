@@ -97,26 +97,7 @@
                             <p>total orders placed</p>
                             <a href="order.php" class="btn">view orders</a>
                         </div>
-                        <div class="box">
-                            <?php
-                            $select_confirm_orders = $conn->prepare("SELECT * FROM orders WHERE status = ? ");
-                            $select_confirm_orders->execute(['in progress']);
-                            $num_of_confirm_orders = $select_confirm_orders->rowCount();
-                            ?>
-                            <h3><?= $num_of_confirm_orders; ?></h3>
-                            <p>total confirm orders</p>
-                            <a href="order.php" class="btn">view confirm orders</a>
-                        </div>
-                        <div class="box">
-                            <?php
-                            $select_canceled_orders = $conn->prepare("SELECT * FROM orders WHERE status = ? ");
-                            $select_canceled_orders->execute(['canceled']);
-                            $num_of_canceled_orders = $select_canceled_orders->rowCount();
-                            ?>
-                            <h3><?= $num_of_canceled_orders; ?></h3>
-                            <p>total confirm orders</p>
-                            <a href="order.php" class="btn">view canceled orders</a>
-                        </div>
+                        
                     </div>
                 </section>
         </div>

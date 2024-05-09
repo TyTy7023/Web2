@@ -99,7 +99,7 @@ CREATE TABLE `cart` (
 DROP TABLE IF EXISTS orders;
 CREATE TABLE `orders` (
   `id` varchar(255) NOT NULL,
-  primary key(id),
+  
   `user_id` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `number` int(11) NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE `contact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   primary key(id),
   `name` varchar(50) NOT NULL,
-  primary key(name),
+  
   `email` varchar(100) NOT NULL,
   `number` int(11) NOT NULL,
   `message` varchar(255) NOT NULL
