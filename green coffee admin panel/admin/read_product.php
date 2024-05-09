@@ -43,7 +43,7 @@
     <title>green coffee admin panel - read product page</title>
 </head>
 <body>
-<?php include'../components/admin_header.php';?>
+<?php include '../components/admin_header.php';?>
         <div class="main">
             <div class="banner">
                 <h1>read products</h1>

@@ -12,6 +12,7 @@
     // Sửa thông tin người dùng
     if(isset($_POST['edit_user'])){
         $user_id = $_POST['user_id'];
+        
         // Chuyển hướng đến trang fix_info.php để chỉnh sửa thông tin của người dùng với ID tương ứng
         header("Location: fix_info.php?user_id=$user_id");
         exit();
@@ -71,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="admin_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <?php include'../components/admin_header.php';?>
+    <?php include '../components/admin_header.php';?>
     <div class="main">
         <div class="banner">
             <h1>Manager Users</h1>
@@ -111,7 +112,7 @@
                     <form method="GET" action="">
                         <input type="hidden" name="toggle_user" value="<?= $user_id ?>">
                         <input type="hidden" name="status" value="<?= $user_status == 'active' ? 'blocked' : 'active' ?>">
-                        <button type="submit"><?= $user_status == 'active' ? 'Block' : 'Unblock' ?></button>
+                        <button type="submit" onclick=" confirm('<?= $user_status == 'active' ? 'Block' : 'Unblock'?> this user');"><?= $user_status == 'active' ? 'Block' : 'Unblock' ?></button>
                     </form>
                     <!-- Nút xóa người dùng -->
                     

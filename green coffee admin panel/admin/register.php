@@ -54,50 +54,77 @@
 
 <body>
 
-    <div class="main-contain">
+<div class="main-container">
         <section class="form-container">
-            <div id="admin_login">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="title">
-                        <img src="../img/download.png">
-                        <h1>REGISTER now</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum deserunt minus
-                            veniam
-                            tenetur
-                        </p>
-                    </div>
-                    <div class="input-field">
-                        <label for="">user name <sup>*</sup></label>
-                        <input type="text" name="name" maxlength="20" require placeholder="Enter your username"
-                            oninput="this.value.replace(/\s/g,'')">
-                    </div>
-
-                    <div class="input-field">
-                        <label for="">user email <sup>*</sup></label>
-                        <input type="email" name="email" maxlength="20" require placeholder="Enter your email"
-                            oninput="this.value.replace(/\s/g,'')">
-                    </div>
-
-                    <div class="input-field">
-                        <label for="">user password <sup>*</sup></label>
-                        <input type="password" name="password" maxlength="20" require placeholder="Enter your password"
-                            oninput="this.value.replace(/\s/g,'')">
-                    </div>
-
-                    <div class="input-field">
-                        <label for="">confirm password <sup>*</sup></label>
-                        <input type="password" name="cpassword" maxlength="20" require placeholder="confirm password"
-                            oninput="this.value.replace(/\s/g,'')">
-                    </div>
-
-                    <div class="input-field">
-                        <label for="">select profile <sup>*</sup></label>
-                        <input type="file" name="image" accept="../image/*">
-                    </div>
-                    <button type="submit" name="register" class="btn">register now</button>
-                    <p>already have an account ? <a href="login.php">login now</a></p>
-                </form>
+        <div class="title">
+                <img src="../img/download.png">
+                <h1>register now</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto dolorum deserunt minus
+                    veniam
+                    tenetur
+                </p>
             </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="input-field">
+                    <p>your name <span>*</span></p>
+                    <input type="text" name="name" required placeholder="enter your name" maxlength="50">
+                </div>
+                <div class="input-field">
+                    <p>your email <span>*</span></p>
+                    <input type="email" name="email" required placeholder="enter your name.." maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
+                </div>
+                <div class="input-field">
+                    <p>Your number <span>*</span></p>
+                    <input type="number" name="number" required maxlength="50" placeholder="Enter Your Number.."
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>your password <span>*</span></p>
+                    <input type="password" name="pass" nequired placeholder="enter your password.." maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
+                </div>
+                <div class="input-field">
+                    <p>confirm your password <span>*</span></p>
+                    <input type="password" name="cpass" nequired placeholder="enter your password again.." maxlength="50"
+                        oninput="this.value = this.value.replace(/\s/g, '')">
+                </div>
+                <div class="input-field">
+                    <p>Address line 01<span>*</span></p>
+                    <input type="text" name="flat" required maxlength="50" placeholder="e.g flat & building number.."
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Address line 02<span>*</span></p>
+                    <input type="text" name="street" required maxlength="50" placeholder="e.g street.." class="input">
+                </div>
+                <div class="input-field">
+                    <p>City name<span>*</span></p>
+                    <input type="text" name="city" required maxlength="50" placeholder="enter your city name.."
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Country name<span>*</span></p>
+                    <input type="text" name="country" required maxlength="50" placeholder="enter your city name.."
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Pincode<span>*</span></p>
+                    <input type="text" name="pincode" required maxlength="6" placeholder="your pun code.." min="0" max="999999"
+                        class="input">
+                </div>
+                <div class="input-field">
+                    <p>Address type<span>*</span></p>
+                    <select name="address_type" class="button">
+                        <option value="home">home</option>
+                        <option value="office">office</option>
+                    </select>
+                </div>
+                <button type="submit" name="submit" value="register now" class="btn">register</button>
+                <p>already have an account? <a href="login.php">login now</a></p>
+            </form>
+        </section>
+    </div>
         </section>
     </div>
 

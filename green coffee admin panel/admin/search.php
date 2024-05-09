@@ -67,7 +67,7 @@
     <title>green coffee admin panel - order place page</title>
 </head>
 <body>
-    <?php include'../components/admin_header.php';?>
+    <?php include '../components/admin_header.php';?>
     <div class="main">
         <div class="banner">
             <h1>order place</h1>
@@ -96,40 +96,81 @@
                         $select_products->execute([$fetch_order['product_id']]);
                         if ($select_products->rowCount() > 0) {
                             $fetch_product = $select_products->fetch(PDO::FETCH_ASSOC);
-            ?>
-                <div class="box">
-                    <div class="status" style="color: <?php echo ($fetch_order['status'] == 'in progress') ? 'green' : 'red'; ?>"><?php echo $fetch_order['status']; ?></div>
-                    <div class="detail">
-                        <p>user name : <span><?php echo $fetch_order['name']; ?></span></p>
-                        <p>user id : <span><?php echo $fetch_order['id']; ?></span></p>
-                        <p>placed on : <span><?php echo $fetch_order['date']; ?></span></p>
-                        <p>user number : <span><?php echo $fetch_order['number']; ?></span></p>
-                        <p>user email : <span><?php echo $fetch_order['email']; ?></span></p>
-                        <p>name product : <span><?php echo $fetch_product['name']; ?></span></p>
-                        <p>total price: <span><?php echo $fetch_order['price']; ?></span></p>
-                        <p>method : <span><?php echo $fetch_order['method']; ?></span></p>
-                        <p>address : <span><?php echo $fetch_order['address']; ?></span></p>
-                    </div>
-                    <form action="" method="post">
-                        <input type="hidden" name="order_id" value="<?php echo $fetch_order['id']; ?>">
-                        <select name="update_payment">
-                            <option disabled selected><?php echo $fetch_order['payment_status']; ?></option>
-                            <option value="pending">pending</option>
-                            <option value="in progress">procesed</option>
-                        </select>
-                        <div class="flex-btn">
-                            <button type="submit" name="update_order" class="btn">mark order</button>
-                            <button type="submit" name="delete_order" class="btn">delete order</button>
-                        </div>
-                    </form>
-                </div>
-            <?php
+                            foreach ($orders as $order) {
+                                $order_id = $order['id'];
+                                if (!isset($grouped_orders[$order_id])) {
+                                    $grouped_orders[$order_id] = [];
+                                }
+                                $grouped_orders[$order_id][] = $order;
+                            }
+                        
+                            // Fetch all products
+                            $select_products = $conn->prepare("SELECT * FROM product");
+                            $select_products->execute();
+                            $products = $select_products->fetchAll(PDO::FETCH_ASSOC);
+                            
+                        
+                            // Display orders
+                            foreach ($grouped_orders as $order_id => $grouped_order) {
+                                // Assuming all orders with the same ID have the same user details
+                                $first_order = $grouped_order[0];
+                                ?>
+                                <div class="box">
+                                    <div class="status" style="color: <?php echo ($first_order['status'] == 'in progress') ? 'green' : 'red'; ?>"><?php echo $first_order['status']; ?></div>
+                                    <div class="detail">
+                                        <p>user name : <span><?php echo $first_order['name']; ?></span></p>
+                                        <p>user id : <span><?php echo $first_order['id']; ?></span></p>
+                                        <p>placed on : <span><?php echo $first_order['date']; ?></span></p>
+                                        <p>user number : <span><?php echo $first_order['number']; ?></span></p>
+                                        <p>user email : <span><?php echo $first_order['email']; ?></span></p>
+                                        <!-- Display product name if it exists -->
+                                        <?php
+                                        $total = 0;
+                                       foreach ($grouped_order as $order) {
+                                        $product_name = '';
+                                        $product_qty = '';
+                                        
+                                        foreach ($products as $product) {
+                                            if ($product['id'] == $order['product_id']) {
+                                                $product_name = $product['name'];
+                                                $product_qty = isset($order['qty']) ? $order['qty'] : 'N/A'; 
+                                                $total = $total + $product['price']*$product_qty;
+                                                break;
+                                            }
+                                        }
+                                        if (!empty($product_name)) {
+                                            ?>
+                                            <p style="color:#87a243">name product : <span><?php echo $product_name; ?></span>-qty:<span><?php echo $product_qty; ?></span></p>
+                                        <?php
+                                        }
+                                    }
+                                    
+                                        ?>
+                                        <p style="color:#87a243">total price: <span><?php echo $total; ?></span></p>
+                                        <p>method : <span><?php echo $first_order['method']; ?></span></p>
+                                        <p>address : <span><?php echo $first_order['address']; ?></span></p>
+                                    </div>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="order_id" value="<?php echo $first_order['id']; ?>">
+                                        <select name="update_payment">
+                                            <option disabled selected><?php echo $first_order['status']; ?></option>
+                                            <option value="pending">pending</option>
+                                            <option value="in progress">processed</option>
+                                        </select>
+                                        <div class="flex-btn">
+                                            <button type="submit" name="update_order" class="btn">mark order</button>
+                                            <button type="submit" name="delete_order" class="btn">delete order</button>
+                                        </div>
+                                    </form>
+                                </div>
+                        <?php
+                            }
+                        }}
+                        } else {
+                            echo '<p class="empty">No orders have been placed yet</p>';
                         }
-                    }
-                } else {
-                    echo '<p></p><p class="empty">No orders have been placed yet</p';
-                }
-            ?>
+                        ?>
+                        
             </div>
         </section>
     </div>

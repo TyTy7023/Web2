@@ -94,54 +94,6 @@ $grouped_orders = [];
             <h1 class="heading">all orders</h1>
             <div class="box-container">
             <?php
-<<<<<<< HEAD
-            $last_order_id = null;
-                $select_orders = $conn->prepare("SELECT * FROM orders");
-                $select_orders->execute();
-                if ($select_orders->rowCount() > 0) {
-                    $orders = $select_orders->fetchAll(PDO::FETCH_ASSOC);
-                    foreach($orders as $fetch_order){
-                        $order_id = $fetch_order['id']; // Current order ID
-                        $select_products = $conn->prepare("SELECT * FROM product WHERE id = ?");
-                        $select_products->execute([$fetch_order['product_id']]);
-                        if ($order_id != $last_order_id) { // Kiểm tra nếu ngày đặt hàng khác với ngày đặt hàng trước đó
-                            if ($last_order_id !== null) {
-                                echo '</div>'; // Đóng nhóm trước (nếu có)
-                            }// Tạo một nhóm mới
-                            echo '<div class="order-group">';
-                            echo '<h3 class="order-id">Order date: ' . $fetch_order['date'] . ' -  Order id: <i>' .$fetch_order['id'] .'</i></h3>';
-                            $last_order_id = $order_id; // Cập nhật ID đặt hàng cuối cùng
-                        }
-                        if ($select_products->rowCount() > 0) {
-                            $fetch_product = $select_products->fetch(PDO::FETCH_ASSOC);
-            ?>
-                <div class="box">
-                    <div class="status" style="color: <?php echo ($fetch_order['status'] == 'in progress') ? 'green' : 'red'; ?>"><?php echo $fetch_order['status']; ?></div>
-                    <div class="detail">
-                        <p>user name : <span><?php echo $fetch_order['name']; ?></span></p>
-                        <p>user id : <span><?php echo $fetch_order['id']; ?></span></p>
-                        <p>placed on : <span><?php echo $fetch_order['date']; ?></span></p>
-                        <p>user number : <span><?php echo $fetch_order['number']; ?></span></p>
-                        <p>user email : <span><?php echo $fetch_order['email']; ?></span></p>
-                        <p>name product : <span><?php echo $fetch_product['name']; ?></span></p>
-                        <p>total price: <span><?php echo $fetch_order['price']; ?></span></p>
-                        <p>method : <span><?php echo $fetch_order['method']; ?></span></p>
-                        <p>address : <span><?php echo $fetch_order['address']; ?></span></p>
-                    </div>
-                    <form action="" method="post">
-                        <input type="hidden" name="order_id" value="<?php echo $fetch_order['id']; ?>">
-                        <select name="update_payment">
-                            <option disabled selected><?php echo $fetch_order['status']; ?></option>
-                            <option value="pending">pending</option>
-                            <option value="in progress">procesed</option>
-                        </select>
-                        <div class="flex-btn">
-                            <button type="submit" name="update_order" class="btn">mark order</button>
-                            <button type="submit" name="delete_order" class="btn">delete order</button>
-                        </div>
-                    </form>
-                </div>
-=======
                if ($select_orders->rowCount() > 0) {
     $orders = $select_orders->fetchAll(PDO::FETCH_ASSOC);
     foreach ($orders as $order) {
@@ -177,7 +129,6 @@ $grouped_orders = [];
                foreach ($grouped_order as $order) {
                 $product_name = '';
                 $product_qty = '';
->>>>>>> KimSen
                 
                 foreach ($products as $product) {
                     if ($product['id'] == $order['product_id']) {
@@ -202,9 +153,9 @@ $grouped_orders = [];
             <form action="" method="post">
                 <input type="hidden" name="order_id" value="<?php echo $first_order['id']; ?>">
                 <select name="update_payment">
-                    <option disabled selected><?php echo $first_order['payment_status']; ?></option>
+                    <option disabled selected><?php echo $first_order['status']; ?></option>
                     <option value="pending">pending</option>
-                    <option value="in progress">procesed</option>
+                    <option value="in progress">processed</option>
                 </select>
                 <div class="flex-btn">
                     <button type="submit" name="update_order" class="btn">mark order</button>
@@ -227,7 +178,7 @@ $grouped_orders = [];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <!-- custom js link -->
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript" src="../script.js"></script>
 
     <!-- alert -->
     <?php include '../components/alert.php'; ?>

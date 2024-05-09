@@ -25,16 +25,18 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="admin_style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="admin_style.css?v=<?php echo time(); ?>">
     <title>green coffee admin panel - register page</title>
 </head>
+
 <body>
 
-<div class="main-container">
+    <div class="main-container">
         <section class="form-container">
             <div class="title">
                 <img src="../img/download.png">
@@ -45,30 +47,33 @@
                 </p>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
-                            
-                            
-                            <div class="input-field">
-                                    <label for="">user email <sup>*</sup></label>
-                                    <input type="email" name="email" maxlength="20" require placeholder ="Enter your email" oninput="this.value.replace(/\s/g,'')">
-                            </div>
 
-                            <div class="input-field">
-                                    <label for="">user password <sup>*</sup></label>
-                                    <input type="password" name="password" maxlength="20" require placeholder ="Enter your password" oninput="this.value.replace(/\s/g,'')">
-                            </div>
-                            <button type="submit" name="login" class="btn">login now</button>
-                            <p>do not have an account ? <a href="register.php">register now</a></p>
-                        </form>
+
+                <div class="input-field">
+                    <label for="">user email <sup>*</sup></label>
+                    <input type="email" name="email" maxlength="20" require placeholder="Enter your email"
+                        oninput="this.value.replace(/\s/g,'')">
+                </div>
+
+                <div class="input-field">
+                    <label for="">user password <sup>*</sup></label>
+                    <input type="password" name="password" maxlength="20" require placeholder="Enter your password"
+                        oninput="this.value.replace(/\s/g,'')">
+                </div>
+                <button type="submit" name="login" class="btn">login now</button>
+                <p>do not have an account ? <a href="register.php">register now</a></p>
+            </form>
         </section>
     </div>
-        
-        <!-- sweetalert cdn link -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
-        <!-- custom js link -->
-        <script type="text/javascript" src="script.js"></script>
-    
-        <!-- alert -->
-        <?php include '../components/alert.php'; ?>
-    </body>
+    <!-- sweetalert cdn link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    <!-- custom js link -->
+    <script type="text/javascript" src="script.js"></script>
+
+    <!-- alert -->
+    <?php include '../components/alert.php'; ?>
+</body>
+
 </html>

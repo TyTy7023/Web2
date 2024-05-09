@@ -75,8 +75,11 @@
             if($fetch_delete_image['image'] != ''){
                 unlink('../image/'.$fetch_delete_image['image']);
             }
-    
-            $delete_product = $conn->prepare("DELETE FROM product WHERE id=?");
+            $delete_orders = $conn->prepare("DELETE FROM orders WHERE product_id = ?");
+            $delete_orders->execute([$p_id]);
+            
+            // Tiếp tục với việc xóa bản ghi trong bảng 'product'
+            $delete_product = $conn->prepare("DELETE FROM product WHERE id = ?");
             $delete_product->execute([$p_id]);
     
             // 
@@ -97,7 +100,7 @@
     <title>green coffee admin panel - edit product page</title>
 </head>
 <body>
-<?php include'../components/admin_header.php';?>
+<?php include '../components/admin_header.php';?>
         <div class="main">
             <div class="banner">
                 <h1>edit products</h1>
@@ -152,7 +155,7 @@
                             <div class="flex-btn">
                                 <button type="submit" name="update" class="btn">update product</button>
                                 <a href="view_product.php" class="btn">go back</a>
-                                <button type="submit" name="delete" class="btn">delete product</button>
+                                <button type="submit" name="delete" class="btn"onclick="return confirm('delete this product');">delete product</button>
 
                             </div>
                         </form>

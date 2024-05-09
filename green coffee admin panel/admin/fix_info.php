@@ -2,14 +2,8 @@
     include '../components/connection.php';
     session_start();
 
-    // Kiểm tra nếu người dùng chưa đăng nhập, chuyển hướng về trang đăng nhập
-    if(!isset($_SESSION['user_id'])){
-        header('Location: login.php');
-        exit();
-    }
-
     // Lấy ID của người dùng hiện tại từ session
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_GET['user_id'];
 
     // Lấy thông tin người dùng từ CSDL để hiển thị trong form sửa thông tin
     $select_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
@@ -34,6 +28,22 @@
         header('Location: user_account.php');
         exit();
     }
+    $address_user = $conn->prepare("SELECT * FROM users WHERE id = ?");
+                    $address_user->execute([$user_id]);
+                    $fetch_address = $address_user->fetch(PDO::FETCH_ASSOC);
+
+                    $temp_address = $fetch_address['address'];
+                    $info_address = explode(",", $temp_address);
+
+                    $flat = $info_address[0];
+                    $street = $info_address[1];
+                    $city = $info_address[2];
+                    $country = $info_address[3];
+                    $pincode = $info_address[4];
+
+                    $address_type = $fetch_address['address_type'];
+
+                    $number = $fetch_address['number'];
 ?>
 
 <!DOCTYPE html>
@@ -93,12 +103,15 @@
     </style>
 </head>
 <body>
-    <h1 class="heading">Edit User Information</h1>
-    <div class="container">
-        <form action="fix_info.php" method="post" class="form">
+    <div class="main-container">
+        <section class="form-container">
+            <div class="title">
+                <h1 style="color:var(--green);">Edit User Information</h1>
+            </div>
+        <form action="fix_info.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo $user_info['name']; ?>" required maxlength="50">
+                <input type="text" id="name" name="name" value="<?php echo $user_info['name']; ?>" required maxlength="50"> 
             </div>
 
             <div class="form-group">
@@ -118,27 +131,27 @@
 
             <div class="form-group">
                 <label for="flat">Address line 01:</label>
-                <input type="text" id="flat" name="flat" value="<?php echo $user_info['address']; ?>" required maxlength="50">
+                <input type="text" id="flat" name="flat" value="<?php echo  $flat; ?>" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="street">Address line 02:</label>
-                <input type="text" id="street" name="street" value="" required maxlength="50">
+                <input type="text" id="street" name="street" value="<?php echo  $street; ?>" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="city">City name:</label>
-                <input type="text" id="city" name="city" value="<?php echo $user_info['address']; ?>" required maxlength="50">
+                <input type="text" id="city" name="city" value="<?php echo $city; ?>" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="country">Country name:</label>
-                <input type="text" id="country" name="country" value="<?php echo $user_info['address']; ?>" required maxlength="50">
+                <input type="text" id="country" name="country" value="<?php echo $country; ?>" required maxlength="50">
             </div>
 
             <div class="form-group">
                 <label for="pincode">Pincode:</label>
-                <input type="text" id="pincode" name="pincode" value="<?php echo $user_info['address']; ?>" required maxlength="6" min="0" max="999999">
+                <input type="text" id="pincode" name="pincode" value="<?php echo $pincode; ?>" required maxlength="6" min="0" max="999999">
             </div>
 
             <div class="form-group">
@@ -150,9 +163,10 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" name="save">Save</button>
+                <button type="submit" name="save" class="btn">Save</button>
             </div>
         </form>
     </div>
+    </section>
 </body>
 </html>

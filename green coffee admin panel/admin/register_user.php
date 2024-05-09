@@ -31,7 +31,7 @@
         $address_type = $_POST['address_type'];
         $address_type= filter_var($address_type, FILTER_SANITIZE_STRING);
         $address = $_POST['flat'].', '.$_POST['street'].', '.$_POST['city'].', '.$_POST['country'].', '. $_POST['pincode'];
-        
+
         $select_user = $conn->prepare("SELECT * FROM users WHERE email = ?");
         $select_user->execute([$email]);
         $row = $select_user->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@
             else{
                 $insert_user = $conn->prepare("INSERT INTO `users` (id, name, email, password, number, address, address_type ) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $insert_user->execute([$id,$name,$email,$pass,$number,$address,$address_type]);
-                
+
                 // Chuyển hướng đến trang user_account.php
                 header('Location: user_account.php');
                 exit; // Kết thúc kịch bản sau khi chuyển hướng
@@ -125,7 +125,7 @@
                     </select>
                 </div>
                 <button type="submit" name="submit" value="register now" class="btn">register</button>
-                
+
             </form>
         </section>
     </div>

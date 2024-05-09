@@ -89,11 +89,12 @@
                         </div>
                         <div class="box">
                             <?php
-                            $select_orders = $conn->prepare("SELECT * FROM orders");
+                            $select_orders = $conn->prepare("SELECT COUNT(DISTINCT id) AS num_of_unique_orders FROM orders");
                             $select_orders->execute();
-                            $num_of_orders = $select_orders->rowCount();
+                            $row = $select_orders->fetch(PDO::FETCH_ASSOC);
+                            $num_of_unique_orders = $row['num_of_unique_orders'];
                             ?>
-                            <h3><?= $num_of_orders; ?></h3>
+                            <h3><?= $num_of_unique_orders; ?></h3>
                             <p>total orders placed</p>
                             <a href="order.php" class="btn">view orders</a>
                         </div>
