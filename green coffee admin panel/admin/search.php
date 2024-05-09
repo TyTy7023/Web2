@@ -42,10 +42,19 @@
         $success_msg[] = 'order updated';
     }
 
+
     //search order
     $from_date = isset($_GET['from_date']) ? $_GET['from_date'] : '';
     $to_date = isset($_GET['to_date']) ? $_GET['to_date'] : '';
 
+    $where_clause = "";
+    $params = [];
+
+    if (!empty($from_date) && !empty($to_date)) {
+        $where_clause = " WHERE date BETWEEN ? AND ?";
+        $params = [$from_date, $to_date];
+    }
+   
 ?>
 
 <!DOCTYPE html>
@@ -74,11 +83,11 @@
             </div>
         </div>
         <section class="order-container">
-            <h1 class="heading">all orders</h1>
+            <h1 class="heading">search results</h1>
             <div class="box-container">
             <?php
-                $select_orders = $conn->prepare("SELECT * FROM orders");
-                $select_orders->execute();
+                $select_orders = $conn->prepare("SELECT * FROM orders" . $where_clause);
+                $select_orders->execute($params);
                 if ($select_orders->rowCount() > 0) {
                     $orders = $select_orders->fetchAll(PDO::FETCH_ASSOC);
                     foreach($orders as $fetch_order){
@@ -114,12 +123,11 @@
                         </div>
                     </form>
                 </div>
-                
             <?php
                         }
                     }
                 } else {
-                    echo '<p></p><p class="empty">No orders have been placed yet</p>';
+                    echo '<p></p><p class="empty">No orders have been placed yet</p';
                 }
             ?>
             </div>
