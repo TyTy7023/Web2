@@ -118,7 +118,7 @@ $total_amount = 0;
         <div class="title2">
             <a href="home.php">Home</a><span> / Order details </span>
         </div>
-        <section class="order-detail">
+        <section class="products">
             <div class="title">
                 <img src="img/download.png" class="logo">
                 <h1>Order details</h1>
@@ -139,15 +139,15 @@ $total_amount = 0;
                                 $sub_total = ($fetch_order['price'] * $fetch_order['qty']);
                                 $total_amount += $sub_total; // Cộng tổng tiền của mỗi sản phẩm vào tổng tiền của tất cả sản phẩm
                                 ?>
-                                <div class="box">
-                                    <div class="col product">
+                                <form action="" method="post" class="box">
+                                    
                                         <p class="title"><i class="bi bi-calender-fill"></i> <?= $fetch_order['date']; ?></p>
                                         <img src="image/<?= $fetch_product['image']; ?>" class="image">
                                         <p class="price"> <?= $fetch_product['price']; ?> x <?= $fetch_order['qty']; ?></p>
                                         <h3 class="name"> <?= $fetch_product['name']; ?></h3>
                                         <p class="sub-total">Subtotal: $<?= $sub_total; ?></p>
-                                    </div>
-                                </div>
+                                    
+                            </form>
                             <?php }
                         } else {
                             echo '<p></p><p class="empty">No orders have been placed yet</p>';

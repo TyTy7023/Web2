@@ -27,14 +27,14 @@ if (isset($_POST['delete_order'])) {
 }
 
 //update order
-if (isset($_POST['update_order'])) {
+if (isset($_POST['update_payment'])) {
     $order_id = $_POST['order_id'];
     $order_id = filter_var($order_id, FILTER_SANITIZE_STRING);
 
     $update_payment = $_POST['update_payment'];
     $update_payment = filter_var($update_payment, FILTER_SANITIZE_STRING);
 
-    $update_pay = $conn->prepare("UPDATE orders SET payment_status = ? WHERE id = ?");
+    $update_pay = $conn->prepare("UPDATE orders SET status = ? WHERE id = ?");
     $update_pay->execute([$update_payment, $order_id]);
 
     $success_msg[] = 'order updated';
@@ -119,7 +119,7 @@ $grouped_orders = [];
             <div class="status" style="color: <?php echo ($first_order['status'] == 'in progress') ? 'green' : 'red'; ?>"><?php echo $first_order['status']; ?></div>
             <div class="detail">
                 <p>user name : <span><?php echo $first_order['name']; ?></span></p>
-                <p>user id : <span><?php echo $first_order['id']; ?></span></p>
+                <p>odee id : <span><?php echo $first_order['id']; ?></span></p>
                 <p>placed on : <span><?php echo $first_order['date']; ?></span></p>
                 <p>user number : <span><?php echo $first_order['number']; ?></span></p>
                 <p>user email : <span><?php echo $first_order['email']; ?></span></p>
@@ -132,15 +132,15 @@ $grouped_orders = [];
                 
                 foreach ($products as $product) {
                     if ($product['id'] == $order['product_id']) {
-                        $product_name = $product['name'];
+                        $product_id = $product['id'];
                         $product_qty = isset($order['qty']) ? $order['qty'] : 'N/A'; 
                         $total = $total + $product['price']*$product_qty;
                         break;
                     }
                 }
-                if (!empty($product_name)) {
+                if (!empty($product_id)) {
                     ?>
-                    <p style="color:#87a243">name product : <span><?php echo $product_name; ?></span>-qty:<span><?php echo $product_qty; ?></span></p>
+                    <p style="color:#87a243">id product : <span><?php echo $product_id; ?></span> // quantity : <span><?php echo $product_qty; ?></span></p>
                 <?php
                 }
             }
@@ -155,7 +155,8 @@ $grouped_orders = [];
                 <select name="update_payment">
                     <option disabled selected><?php echo $first_order['status']; ?></option>
                     <option value="pending">pending</option>
-                    <option value="in progress">processed</option>
+                    <option value="confirm">confirm</option>
+                    <option value="delivered">delivered</option>
                 </select>
                 <div class="flex-btn">
                     <button type="submit" name="update_order" class="btn">mark order</button>
@@ -178,7 +179,7 @@ $grouped_orders = [];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <!-- custom js link -->
-    <script type="text/javascript" src="../script.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 
     <!-- alert -->
     <?php include '../components/alert.php'; ?>

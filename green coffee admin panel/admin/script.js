@@ -1,6 +1,6 @@
 const header = document.querySelector('header');
-const navbar = document.querySelector('.navbar');
-const userBox = document.querySelector('.profile_detail');
+var navbar = document.querySelector('.navbar');
+var userBox = document.querySelector('.profile_detail');
 
 function fixedNavbar() {
     header.classList.toggle('scrolled', window.scrollY > 0);
@@ -19,5 +19,3 @@ menu.addEventListener('click', function() {
 userBtn.addEventListener('click', function() {
     userBox.classList.toggle("active");
 });
-
-console.log(menu);

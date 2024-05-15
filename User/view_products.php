@@ -153,17 +153,26 @@
                 <form action="" method="post" class="box">
                     <img src="image/<?= $fetch_products['image']; ?>" class="img">
                     <div class="button">
+                    <?php 
+                        if ($fetch_products['status'] != 'deactive') {
+                    ?>
                         <button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
+                        <?php } ?>
                         <button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>
                         <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="bx bxs-show"></a>
                     </div>
+                    
                     <h3 class="name"><?= $fetch_products['name']; ?></h3>
                     <input type="hidden" name="product_id" value="<?= $fetch_products['id']; ?>">
                     <div class="flex">
                         <p class="price">Price $<?= $fetch_products['price']; ?>/-</p>
                         <input type="number" name="qty" required min="1" value="1" max="99" class="qty">
                     </div>
+                    <?php 
+                        if ($fetch_products['status'] != 'deactive') {
+                    ?>
                     <a href="checkout.php?get_id=<?= $fetch_products['id']; ?>" class="btn">Buy Now</a>
+                    <?php } ?>
                 </form>
                 <?php
                     }

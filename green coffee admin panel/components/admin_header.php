@@ -6,7 +6,7 @@
             <a href="add_products.php">add product</a>
             
             <a href="view_product.php">view product</a>
-            <a href="user_account.php">accounts</a>
+            <a href="order.php">view order</a>
             
         </nav>
         <div class="icons">
