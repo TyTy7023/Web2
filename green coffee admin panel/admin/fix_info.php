@@ -3,7 +3,7 @@ include '../components/connection.php';
 session_start();
 
 // Lấy ID của người dùng hiện tại từ session
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit();
 }
@@ -19,7 +19,7 @@ if(isset($_POST['save'])){
     // Lấy thông tin mới từ form
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Hash the password
+    $password =$_POST['pass'];
     $number = $_POST['number'];
     $address = $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['country'] . ', ' . $_POST['pincode'];
     $address_type = $_POST['address_type'];

@@ -127,4 +127,5 @@
         </section>
     </div>
 </body>
+<script type="text/javascript" src="script.js"></script>
 </html>

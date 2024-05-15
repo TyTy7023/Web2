@@ -161,7 +161,11 @@
                 <form action="" method="post" class="box">
                     <img src="image/<?php echo $row['image']; ?>" class="img">
                     <div class="button">
+                    <?php 
+                        if ($row['status'] != 'deactive') {
+                    ?>
                         <button type="submit" name="add_to_cart"><i class="bx bx-cart"></i></button>
+                        <?php } ?>
                         <button type="submit" name="add_to_wishlist"><i class="bx bx-heart"></i></button>
                         <a href="view_page.php?pid=<?php echo $row['id']; ?>" class="bx bxs-show"></a>
                     </div>
@@ -171,7 +175,11 @@
                         <p class="price">Price $<?php echo $row['price']; ?>/-</p>
                         <input type="number" name="qty" required min="1" value="1" max="99" class="qty">
                     </div>
-                    <a href="checkout.php?get_id=<?php echo $row['id']; ?>" class="btn">Buy Now</a>
+                    <?php 
+                        if ($row['status'] != 'deactive') {
+                    ?>
+                    <a href="checkout.php?get_id=<?= $row['id']; ?>" class="btn">Buy Now</a>
+                    <?php } ?>
                 </form>
                 <?php 
                     }

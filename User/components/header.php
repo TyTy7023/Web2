@@ -10,7 +10,11 @@
         fixedNavbar();
         window.addEventListener('scroll', fixedNavbar);
     </script>
-    
+    <?php
+    if(isset($_POST['logout'])){
+        header('location:../login.php');
+    }
+    ?>
     <div class="flex">
         <a href="home.php" class="logo"><img src="img/logo.jpg" alt=""></a>
         <nav class="navbar">

@@ -1,8 +1,8 @@
 <?php
-    include 'connection.php';
+    include '../components/connection.php';
 
     session_start();
     session_unset();
     session_destroy();
-    header('location:../admin/login.php');
+    header('location:admin/login.php');
 ?>

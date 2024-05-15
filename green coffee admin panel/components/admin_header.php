@@ -26,7 +26,7 @@
                     <p><?= $fetch_profile['name'];?></p>
             </div>
             <div class="flex-btn">
-                    <a href="admin_logout.php" onclick="return confirm('logout from this website');" class="logout-btn">logout</a>
+                    <a href="../admin_logout.php" onclick="return confirm('logout from this website');" class="logout-btn">logout</a>
             </div>
             <?php
                 }
