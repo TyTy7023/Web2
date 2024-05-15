@@ -601,6 +601,7 @@ button{
 }
 
 .products .box-container .box {
+    width: 90%;
     box-shadow: var(--box-shadow);
     border-radius: .5rem;
     padding: 2rem 1rem;
