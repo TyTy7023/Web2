@@ -4,7 +4,6 @@
         <nav class="navbar">
             <a href="dashboard.php">dashboard</a>
             <a href="add_products.php">add product</a>
-            
             <a href="view_product.php">view product</a>
             <a href="order.php">view order</a>
             
@@ -27,7 +26,7 @@
                     <p><?= $fetch_profile['name'];?></p>
             </div>
             <div class="flex-btn">
-                    <a href="admin_logout.php" onclick="return confirm('logout from this website');" class="btn">logout</a>
+                    <a href="admin_logout.php" onclick="return confirm('logout from this website');" class="logout-btn">logout</a>
             </div>
             <?php
                 }

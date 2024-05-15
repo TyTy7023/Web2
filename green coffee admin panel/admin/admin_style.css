@@ -295,6 +295,15 @@ header.scrolled a:hover {
     overflow: hidden; /* Ensure overflow is visible for the profile detail */
      /* Initially hide the profile detail */
 }
+.header .profile_detail .logout-btn{
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    width: 11rem;
+    border-radius: .5rem;
+    margin: .5rem 0;
+    padding: .5rem 0;
+}
 
 @keyframes fadeIn {
     0% {

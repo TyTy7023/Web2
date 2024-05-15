@@ -107,8 +107,8 @@ $total_amount = 0;
     .billing-info .btn {
         padding: 11px 22px;
         /* Increase padding by 10% */
-        background-color: #4CAF50;
-        color: white;
+        background-color: var(--light-green);
+        color: black;
         border: none;
         border-radius: 5px;
         text-transform: uppercase;
@@ -118,7 +118,8 @@ $total_amount = 0;
     }
 
     .billing-info .btn:hover {
-        background-color: #45a049;
+        background-color: var(--green);
+        color: white;
     }
 
     .total-container {
@@ -168,7 +169,6 @@ $total_amount = 0;
                                 $total_amount += $sub_total; // Cộng tổng tiền của mỗi sản phẩm vào tổng tiền của tất cả sản phẩm
                 ?>
                 <form action="" method="post" class="box">
-                    <p class="title"><i class="bi bi-calender-fill"></i> <?= $fetch_order['date']; ?></p>
                     <img src="image/<?= $fetch_product['image']; ?>" class="img">
                     <p class="price"> <?= $fetch_product['price']; ?> x <?= $fetch_order['qty']; ?></p>
                     <h3 class="name"> <?= $fetch_product['name']; ?></h3>
@@ -201,12 +201,11 @@ $total_amount = 0;
                 <p class="user"><i class='bx bxs-phone'></i> <?= $fetch_order['number']; ?></p>
                 <p class="user"><i class='bx bxs-envelope'></i> <?= $fetch_order['email']; ?></p>
                 <p class="user"><i class='bx bxs-map'></i> <?= $fetch_order['address']; ?></p>
-                <?php if (isset($fetch_order['total'])) { ?>
                 <!-- Hiển thị tổng số tiền của tất cả các sản phẩm -->
-                <p class="total">Total amount payable : <span>$ <?= $total_amount; ?></span></p>
-                <?php } ?>
-                <p class="title">Status</p>
-                <p class="status" style="color :<?php if ($fetch_order['status'] == 'delevered') {
+                <b class="total">Total amount payable : <span>$ <?= $total_amount; ?></span><br></b>
+
+                <b class="total">Status : </b>
+                <b class="status" style="color :<?php if ($fetch_order['status'] == 'delevered') {
                                                             echo 'green';
                                                         } elseif ($fetch_order['status'] == 'canceled') {
                                                             echo 'red';
@@ -214,8 +213,8 @@ $total_amount = 0;
                                                             echo 'orange';
                                                         }?>
                 ">
-                    <?= $fetch_order['status'] ?>
-                </p>
+                    <?= $fetch_order['status'] ?><br>
+                </b>
                 <?php if ($fetch_order['status'] == 'canceled') {  ?>
                 <a href="view_products.php" class="btn">Order another</a>
                 <?php } else { ?>

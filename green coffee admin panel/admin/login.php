@@ -6,7 +6,7 @@
         $email = $_POST['email'];
         $email = filter_var($email, FILTER_SANITIZE_STRING);
 
-        $pass = sha1($_POST['password']);
+        $pass = ($_POST['password']);
         $pass = filter_var($pass, FILTER_SANITIZE_STRING);
 
         $select_admin = $conn->prepare("SELECT * FROM admin WHERE email = ? AND password = ?");

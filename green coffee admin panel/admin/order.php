@@ -116,7 +116,7 @@ $grouped_orders = [];
         $first_order = $grouped_order[0];
         ?>
         <div class="box">
-            <div class="status" style="color: <?php echo ($first_order['status'] == 'in progress') ? 'green' : 'red'; ?>"><?php echo $first_order['status']; ?></div>
+            <div class="status" style="color: <?php echo ($first_order['status'] == 'delivered') ? 'green' : 'red'; ?>"><?php echo $first_order['status']; ?></div>
             <div class="detail">
                 <p>user name : <span><?php echo $first_order['name']; ?></span></p>
                 <p>odee id : <span><?php echo $first_order['id']; ?></span></p>
@@ -138,11 +138,6 @@ $grouped_orders = [];
                         break;
                     }
                 }
-                if (!empty($product_id)) {
-                    ?>
-                    <p style="color:#87a243">id product : <span><?php echo $product_id; ?></span> // quantity : <span><?php echo $product_qty; ?></span></p>
-                <?php
-                }
             }
             
                 ?>
@@ -154,7 +149,7 @@ $grouped_orders = [];
                 <input type="hidden" name="order_id" value="<?php echo $first_order['id']; ?>">
                 <select name="update_payment">
                     <option disabled selected><?php echo $first_order['status']; ?></option>
-                    <option value="pending">pending</option>
+                    <option value="In process">In process</option>
                     <option value="confirm">confirm</option>
                     <option value="delivered">delivered</option>
                 </select>

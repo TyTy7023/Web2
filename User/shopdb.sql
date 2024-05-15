@@ -125,6 +125,8 @@ CREATE TABLE `admin` (
   `password` varchar(50) NOT NULL,
   `profile` varchar(255) NOT NULL DEFAULT '01.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `profile`) VALUES
+('1', 'TY TY', '123@gmail.com', '123', '01.png');
 
 DROP TABLE IF EXISTS contact;
 CREATE TABLE `contact` (
