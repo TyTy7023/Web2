@@ -61,7 +61,7 @@
                         oninput="this.value.replace(/\s/g,'')">
                 </div>
                 <button type="submit" name="login" class="btn">login now</button>
-                <p>do not have an account ? <a href="register.php">register now</a></p>
+                
             </form>
         </section>
     </div>
